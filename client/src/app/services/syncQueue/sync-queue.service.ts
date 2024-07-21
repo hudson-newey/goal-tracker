@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 import { PingService } from "../ping/ping.service";
-import { Observable, interval, take } from "rxjs";
+import { Observable, first, interval } from "rxjs";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 import { createUrl } from "../helpers";
 import { ApiHttpResponse } from "src/app/types/services";
@@ -18,12 +18,12 @@ export class SyncQueueService extends AbstractService {
   ) {
     super();
 
-    this.timer = interval(3_000);
+    this.timer = interval(5_000);
 
     this.timer.subscribe(() => {
       this.pingService
         .hasServerConnection()
-        .pipe(take(1))
+        .pipe(first())
         .subscribe((status) => {
           this.connectionStatus = status;
 
@@ -88,17 +88,17 @@ export class SyncQueueService extends AbstractService {
       if (method === "POST") {
         this.http
           .post(url, body)
-          .pipe(take(1))
+          .pipe(first())
           .subscribe(() => successCallback());
       } else if (method === "PUT") {
         this.http
           .put(url, body)
-          .pipe(take(1))
+          .pipe(first())
           .subscribe(() => successCallback());
       } else if (method === "DELETE") {
         this.http
           .delete(url)
-          .pipe(take(1))
+          .pipe(first())
           .subscribe(() => successCallback());
       }
     });
@@ -109,7 +109,7 @@ export class SyncQueueService extends AbstractService {
       return;
     }
 
-    console.debug("Attemping to sync from upstream");
+    console.debug("Attempting to sync from upstream");
 
     const virtualTables = this.virtualDatabase.knownVirtualTables();
 
@@ -117,7 +117,7 @@ export class SyncQueueService extends AbstractService {
       const url = createUrl(`/${table}`);
       this.http
         .get(url)
-        .pipe(take(1))
+        .pipe(first())
         .subscribe((response) => {
           const responseBody = response as ApiHttpResponse<any>;
           this.virtualDatabase.updateTable(

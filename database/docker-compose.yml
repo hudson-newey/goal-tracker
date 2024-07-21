@@ -1,7 +1,6 @@
-version: '3'
 services:
   mongo:
     image: mongo:latest
-    container_name: habit-tracker
+    container_name: goal-tracker
     ports:
       - "27017:27017"

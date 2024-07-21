@@ -15,6 +15,8 @@ export class PingService extends AbstractService {
     super();
   }
 
+  public pingRoute = "/ping";
+
   public pingServer(): Observable<ApiHttpResponse<string>> {
     let endpoint = createUrl("/ping");
     return this.http.get<ApiHttpResponse<string>>(endpoint);

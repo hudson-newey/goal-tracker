@@ -39,8 +39,13 @@
     class="uk-input"
     placeholder="Server URL"
     autocapitalize="false"
+    list="custom-server-suggestions"
     [(ngModel)]="customServerUrl"
   />
+
+  <datalist id="custom-server-suggestions">
+    <option value="http://localhost:8081">http://localhost:8081</option>
+  </datalist>
 
   <div class="action-buttons">
     <button
@@ -60,7 +65,11 @@
       Remove Server
     </button>
 
-    <button class="uk-button uk-button-default" [disabled]="!isSyncServerSet">
+    <button
+      class="uk-button uk-button-default"
+      (click)="forceSync()"
+      [disabled]="!isSyncServerSet"
+    >
       Force Sync
     </button>
   </div>
