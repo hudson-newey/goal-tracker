@@ -7,11 +7,11 @@ import { Id } from "src/app/types/helpers";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-edit",
-    templateUrl: "./edit.component.html",
-    styleUrl: "./edit.component.less",
-    standalone: true,
-    imports: [FormsModule],
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrl: "./edit.component.less",
+  standalone: true,
+  imports: [FormsModule],
 })
 export class LogbookEditComponent {
   public constructor(

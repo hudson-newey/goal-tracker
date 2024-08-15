@@ -9,10 +9,10 @@ import { Id } from "src/app/types/helpers";
 import { DatePipe } from "@angular/common";
 
 @Component({
-    selector: "app-task-page",
-    templateUrl: "show.component.html",
-    standalone: true,
-    imports: [RouterLink, DatePipe],
+  selector: "app-task-page",
+  templateUrl: "show.component.html",
+  standalone: true,
+  imports: [RouterLink, DatePipe],
 })
 export class TaskPageComponent implements OnInit {
   public constructor(
@@ -27,12 +27,14 @@ export class TaskPageComponent implements OnInit {
   public ngOnInit(): void {
     const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
 
-    this.api.getTask(modelId)
+    this.api
+      .getTask(modelId)
       .pipe(take(1))
       .subscribe((response) => {
         this.model = new Task(response.data);
 
-        this.goalApi.getGoal(this.model?.Goal as Id)
+        this.goalApi
+          .getGoal(this.model?.Goal as Id)
           .pipe(take(1))
           .subscribe((response) => {
             this.goalModel = new Goal(response.data);

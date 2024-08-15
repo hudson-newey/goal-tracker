@@ -6,16 +6,16 @@ import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-    selector: "app-delete",
-    templateUrl: "./delete.component.html",
-    styleUrls: ["./delete.component.less"],
-    standalone: true,
+  selector: "app-delete",
+  templateUrl: "./delete.component.html",
+  styleUrls: ["./delete.component.less"],
+  standalone: true,
 })
 export class LogbookDeleteComponent implements OnInit {
   public constructor(
     private api: LogbookService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   protected model?: Logbook;
@@ -39,8 +39,6 @@ export class LogbookDeleteComponent implements OnInit {
     this.api
       .deleteLogbook(this.model?.ClientId)
       .pipe(take(1))
-      .subscribe(() =>
-        this.router.navigateByUrl("/logbook")
-      );
+      .subscribe(() => this.router.navigateByUrl("/logbook"));
   }
 }

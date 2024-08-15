@@ -7,10 +7,13 @@ import { Id } from "src/app/types/helpers";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-    selector: "app-update",
-    template: `<app-habit-form [creating]="false" [model]="model"></app-habit-form>`,
-    standalone: true,
-    imports: [HabitFormComponent],
+  selector: "app-update",
+  template: `<app-habit-form
+    [creating]="false"
+    [model]="model"
+  ></app-habit-form>`,
+  standalone: true,
+  imports: [HabitFormComponent],
 })
 export class HabitsUpdateComponent {
   public constructor(

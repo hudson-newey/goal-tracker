@@ -49,6 +49,16 @@
       />
       Quantifiable
     </label>
+
+    <label class="uk-form-label">
+      <input
+        name="time-based-habit"
+        class="uk-checkbox"
+        type="checkbox"
+        [(ngModel)]="model.IsTimeBased"
+      />
+      Time-Based
+    </label>
   </div>
 
   <div *ngIf="model.IsQuantifiable" class="uk-form-label target-value">
@@ -59,8 +69,22 @@
         name="target-value"
         type="number"
         class="uk-input"
-        placeholder="eg. 5 (km run)"
+        placeholder="e.g. '5' (km run)"
         [(ngModel)]="model.TargetValue"
+      />
+    </label>
+  </div>
+
+  <div *ngIf="model.IsTimeBased" class="uk-form-label target-value">
+    <label>
+      Target Time (Seconds)
+
+      <input
+        name="target-time"
+        type="number"
+        class="uk-input"
+        placeholder="e.g. '60' (minutes of exercise)"
+        [(ngModel)]="model.TargetTime"
       />
     </label>
   </div>

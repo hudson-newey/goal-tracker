@@ -3,10 +3,13 @@ import { IHabit } from "src/app/models/habit";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-    selector: "app-new-page",
-    template: `<app-habit-form [creating]="true" [model]="partialModel"></app-habit-form>`,
-    standalone: true,
-    imports: [HabitFormComponent],
+  selector: "app-new-page",
+  template: `<app-habit-form
+    [creating]="true"
+    [model]="partialModel"
+  ></app-habit-form>`,
+  standalone: true,
+  imports: [HabitFormComponent],
 })
 export class NewHabitPage {
   public constructor() {}

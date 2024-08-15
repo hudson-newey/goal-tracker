@@ -19,7 +19,7 @@ export class HabitListComponent implements OnInit {
   public constructor(
     private api: HabitsService,
     private virtualDb: VirtualDatabaseService,
-    private vibration: VibrationService
+    private vibration: VibrationService,
   ) {}
 
   protected habits: Habit[] = [];
@@ -30,13 +30,13 @@ export class HabitListComponent implements OnInit {
 
   protected get completedHabits(): Habit[] {
     return this.habits.filter(
-      (habit: Habit) => !habit.AntiHabit && this.isCompletedToday(habit)
+      (habit: Habit) => !habit.AntiHabit && this.isCompletedToday(habit),
     );
   }
 
   protected get failedAntiHabits(): Habit[] {
     return this.habits.filter(
-      (habit: Habit) => habit.AntiHabit && this.isCompletedToday(habit)
+      (habit: Habit) => habit.AntiHabit && this.isCompletedToday(habit),
     );
   }
 
@@ -44,7 +44,7 @@ export class HabitListComponent implements OnInit {
     this.updateHabits();
 
     this.virtualDb.changeNotifier.addEventListener("change", () =>
-      this.updateHabits()
+      this.updateHabits(),
     );
   }
 
@@ -81,10 +81,10 @@ export class HabitListComponent implements OnInit {
     const indexToRemove: number = model.CompletedDates.findIndex(
       (item: string) => {
         const formattedDate: string = new Date(item).toLocaleDateString(
-          "en-GB"
+          "en-GB",
         );
         return todaysDate === formattedDate;
-      }
+      },
     );
 
     model.CompletedDates.splice(indexToRemove, 1);

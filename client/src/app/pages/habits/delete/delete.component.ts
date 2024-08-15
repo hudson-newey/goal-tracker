@@ -6,15 +6,15 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-    selector: "app-delete-habit-page",
-    templateUrl: "delete.component.html",
-    standalone: true,
+  selector: "app-delete-habit-page",
+  templateUrl: "delete.component.html",
+  standalone: true,
 })
 export class DeleteHabitPageComponent implements OnInit {
   public constructor(
     private api: HabitsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   protected model?: Habit;
@@ -38,8 +38,6 @@ export class DeleteHabitPageComponent implements OnInit {
     this.api
       .deleteHabit(this.model?.ClientId)
       .pipe(take(1))
-      .subscribe(() =>
-        this.router.navigateByUrl("/")
-      );
+      .subscribe(() => this.router.navigateByUrl("/"));
   }
 }

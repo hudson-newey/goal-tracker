@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { VirtualDatabaseService } from './virtual-database.service';
+import { VirtualDatabaseService } from "./virtual-database.service";
 
-describe('VirtualDatabaseService', () => {
+describe("VirtualDatabaseService", () => {
   let service: VirtualDatabaseService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('VirtualDatabaseService', () => {
     service = TestBed.inject(VirtualDatabaseService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

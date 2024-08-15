@@ -10,18 +10,16 @@ import { NgFor, NgIf, AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-habit-form",
-    templateUrl: "./habit-form.component.html",
-    styleUrl: "./habit-form.component.less",
-    standalone: true,
-    imports: [
-        FormsModule,
-        NgFor,
-        NgIf,
-        AsyncPipe,
-    ],
+  selector: "app-habit-form",
+  templateUrl: "./habit-form.component.html",
+  styleUrl: "./habit-form.component.less",
+  standalone: true,
+  imports: [FormsModule, NgFor, NgIf, AsyncPipe],
 })
-export class HabitFormComponent extends AbstractFormComponent<IHabit> implements OnInit {
+export class HabitFormComponent
+  extends AbstractFormComponent<IHabit>
+  implements OnInit
+{
   public constructor(
     private router: Router,
     private api: HabitsService,

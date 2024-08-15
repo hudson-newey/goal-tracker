@@ -5,11 +5,11 @@ import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-new",
-    templateUrl: "./new.component.html",
-    styleUrls: ["./new.component.less"],
-    standalone: true,
-    imports: [FormsModule],
+  selector: "app-new",
+  templateUrl: "./new.component.html",
+  styleUrls: ["./new.component.less"],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class LogbookNewComponent {
   public constructor(

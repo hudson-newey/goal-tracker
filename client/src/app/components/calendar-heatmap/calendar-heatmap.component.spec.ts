@@ -7,8 +7,8 @@ describe("CalendarHeatmapComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [CalendarHeatmapComponent],
-});
+      imports: [CalendarHeatmapComponent],
+    });
     fixture = TestBed.createComponent(CalendarHeatmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

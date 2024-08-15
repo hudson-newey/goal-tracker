@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { VibrationService } from './vibration.service';
+import { VibrationService } from "./vibration.service";
 
-describe('VibrationService', () => {
+describe("VibrationService", () => {
   let service: VibrationService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('VibrationService', () => {
     service = TestBed.inject(VibrationService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

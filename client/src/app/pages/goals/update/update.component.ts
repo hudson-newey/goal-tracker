@@ -7,17 +7,17 @@ import { Id } from "src/app/types/helpers";
 import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form.component";
 
 @Component({
-    selector: "app-update",
-    template: `
+  selector: "app-update",
+  template: `
     <app-goal-form [creating]="false" [model]="model"></app-goal-form>
   `,
-    standalone: true,
-    imports: [GoalFormComponent],
+  standalone: true,
+  imports: [GoalFormComponent],
 })
 export class GoalsUpdateComponent implements OnInit {
   public constructor(
     private api: GoalsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   protected model: IGoal = {};

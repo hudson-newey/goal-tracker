@@ -22,10 +22,7 @@
 
   <label class="uk-form-label">
     Importance
-    <select
-      class="uk-select"
-      (change)="updateImportance($event)"
-    >
+    <select class="uk-select" (change)="updateImportance($event)">
       <option value="1" selected>Low</option>
       <option value="2">Low-Medium</option>
       <option value="3">Medium</option>
@@ -45,11 +42,7 @@
 
   <label class="uk-form-label">
     Complete By
-    <input
-      type="date"
-      class="uk-input"
-      (change)="updateCompleteBy($event)"
-    />
+    <input type="date" class="uk-input" (change)="updateCompleteBy($event)" />
   </label>
 
   <button

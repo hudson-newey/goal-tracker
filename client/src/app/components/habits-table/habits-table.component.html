@@ -12,26 +12,26 @@
     <tr *ngFor="let model of positiveHabits">
       <td>
         @if (!model.IsQuantifiable || model.IsCompletedToday) {
-        <!-- This template is used when a habit can be completed or not completed -->
-        <input
-          [checked]="model.IsCompletedToday"
-          (change)="changeState.emit(model)"
-          type="checkbox"
-          class="uk-checkbox"
-        />
+          <!-- This template is used when a habit can be completed or not completed -->
+          <input
+            [checked]="model.IsCompletedToday"
+            (change)="changeState.emit(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
         } @else {
-        <!--
+          <!--
           This template is used when a habit can have a value attached
           eg. run x km or drank x glasses of water today
         --->
-        <button
-          class="uk-button uk-button-default increment-button"
-          (click)="changeState.emit(model)"
-          (contextmenu)="decrementState.emit(model)"
-          appNoContextMenu
-        >
-          {{ model?.TimesCompletedToday ?? 0 }}
-        </button>
+          <button
+            class="uk-button uk-button-default increment-button"
+            (click)="changeState.emit(model)"
+            (contextmenu)="decrementState.emit(model)"
+            appNoContextMenu
+          >
+            {{ model?.TimesCompletedToday ?? 0 }}
+          </button>
         }
       </td>
 
@@ -107,9 +107,7 @@
   class="uk-button uk-button-default"
   (click)="showAntiHabits = !showAntiHabits"
 >
-  <span>
-    {{ showAntiHabits ? "Hide" : "Show" }} anti habits
-  </span>
+  <span> {{ showAntiHabits ? "Hide" : "Show" }} anti habits </span>
 </button>
 
 <ng-template #defaultDescription>

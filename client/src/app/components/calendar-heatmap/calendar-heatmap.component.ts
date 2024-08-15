@@ -17,7 +17,9 @@ interface CalendarData {
 export class CalendarHeatmapComponent implements AfterViewInit {
   public constructor() {}
 
-  @Input() public data: string[] = [];
+  @Input()
+  public data: string[] = [];
+
   private spec: any = schema;
   private chart: any;
 
@@ -61,7 +63,9 @@ export class CalendarHeatmapComponent implements AfterViewInit {
 
     // Increment counts for dates present in the original array
     for (let date of uniqueDates) {
-      const formattedDate = new Date(date).toLocaleDateString("en-GB").split("T")[0];
+      const formattedDate = new Date(date)
+        .toLocaleDateString("en-GB")
+        .split("T")[0];
       dateCounts[formattedDate] += 1;
     }
 

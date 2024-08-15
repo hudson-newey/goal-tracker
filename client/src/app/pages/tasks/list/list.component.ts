@@ -19,7 +19,7 @@ export class TasksPageComponent implements OnInit {
   public constructor(
     private api: TasksService,
     private virtualDb: VirtualDatabaseService,
-    private vibrate: VibrationService
+    private vibrate: VibrationService,
   ) {}
 
   protected tasks: Task[] = [];
@@ -36,7 +36,7 @@ export class TasksPageComponent implements OnInit {
     this.updateTasks();
 
     this.virtualDb.changeNotifier.addEventListener("change", () =>
-      this.updateTasks()
+      this.updateTasks(),
     );
   }
 

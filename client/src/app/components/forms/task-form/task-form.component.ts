@@ -10,15 +10,11 @@ import { NgFor, AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-task-form",
-    templateUrl: "./task-form.component.html",
-    styleUrl: "./task-form.component.less",
-    standalone: true,
-    imports: [
-        FormsModule,
-        NgFor,
-        AsyncPipe,
-    ],
+  selector: "app-task-form",
+  templateUrl: "./task-form.component.html",
+  styleUrl: "./task-form.component.less",
+  standalone: true,
+  imports: [FormsModule, NgFor, AsyncPipe],
 })
 export class TaskFormComponent
   extends AbstractFormComponent<ITask>

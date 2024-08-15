@@ -19,7 +19,7 @@ export class GoalsPageComponent implements OnInit {
   public constructor(
     private api: GoalsService,
     private virtualDb: VirtualDatabaseService,
-    private vibration: VibrationService
+    private vibration: VibrationService,
   ) {}
 
   protected goals: Goal[] = [];
@@ -28,7 +28,7 @@ export class GoalsPageComponent implements OnInit {
     this.updateGoals();
 
     this.virtualDb.changeNotifier.addEventListener("change", () =>
-      this.updateGoals()
+      this.updateGoals(),
     );
   }
 

@@ -7,16 +7,16 @@ import { Id } from "src/app/types/helpers";
 import { DatePipe } from "@angular/common";
 
 @Component({
-    selector: "app-show",
-    templateUrl: "./show.component.html",
-    styleUrls: ["./show.component.less"],
-    standalone: true,
-    imports: [RouterLink, DatePipe],
+  selector: "app-show",
+  templateUrl: "./show.component.html",
+  styleUrls: ["./show.component.less"],
+  standalone: true,
+  imports: [RouterLink, DatePipe],
 })
 export class LogbookShowComponent {
   public constructor(
     private api: LogbookService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   protected model?: Logbook;
@@ -24,7 +24,8 @@ export class LogbookShowComponent {
   public ngOnInit(): void {
     const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
 
-    this.api.getLogbook(modelId)
+    this.api
+      .getLogbook(modelId)
       .pipe(take(1))
       .subscribe((response) => {
         this.model = new Logbook(response.data);

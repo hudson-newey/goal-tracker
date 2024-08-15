@@ -1,21 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { HabitsTableComponent } from './habits-table.component';
+import { HabitsTableComponent } from "./habits-table.component";
 
-describe('HabitsTableComponent', () => {
+describe("HabitsTableComponent", () => {
   let component: HabitsTableComponent;
   let fixture: ComponentFixture<HabitsTableComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [HabitsTableComponent]
-});
+      imports: [HabitsTableComponent],
+    });
     fixture = TestBed.createComponent(HabitsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

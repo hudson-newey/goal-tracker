@@ -6,13 +6,11 @@ describe("InterceptorInterceptor", () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [ConfigInterceptor],
-    })
+    }),
   );
 
   it("should be created", () => {
-    const interceptor: ConfigInterceptor = TestBed.inject(
-      ConfigInterceptor
-    );
+    const interceptor: ConfigInterceptor = TestBed.inject(ConfigInterceptor);
     expect(interceptor).toBeTruthy();
   });
 });

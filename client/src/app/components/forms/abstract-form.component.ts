@@ -6,14 +6,15 @@ export interface IAbstractFormComponent<T> {
 }
 
 @Directive({
-    selector: "app-abstract-form",
-    standalone: true
+  selector: "app-abstract-form",
+  standalone: true,
 })
 export abstract class AbstractFormComponent<T extends object>
   implements IAbstractFormComponent<T>
 {
-  public constructor() {}
+  @Input({ required: true })
+  public creating!: boolean;
 
-  @Input({ required: true }) public creating!: boolean;
-  @Input({ required: false }) public model: T = {} as T;
+  @Input({ required: false })
+  public model: T = {} as T;
 }

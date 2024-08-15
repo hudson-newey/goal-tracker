@@ -5,9 +5,7 @@ import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class VirtualDatabaseService extends AbstractService {
-  public constructor(
-    private config: ClientConfigService,
-  ) {
+  public constructor(private config: ClientConfigService) {
     super();
   }
 

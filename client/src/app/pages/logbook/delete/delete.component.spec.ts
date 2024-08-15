@@ -7,8 +7,8 @@ describe("LogbookDeleteComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [LogbookDeleteComponent],
-});
+      imports: [LogbookDeleteComponent],
+    });
     fixture = TestBed.createComponent(LogbookDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

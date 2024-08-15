@@ -6,15 +6,15 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-    selector: "app-delete-task-page",
-    templateUrl: "delete.component.html",
-    standalone: true,
+  selector: "app-delete-task-page",
+  templateUrl: "delete.component.html",
+  standalone: true,
 })
 export class DeleteTaskPageComponent implements OnInit {
   public constructor(
     private api: TasksService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   protected model?: Task;
@@ -38,8 +38,6 @@ export class DeleteTaskPageComponent implements OnInit {
     this.api
       .deleteTask(this.model?.ClientId)
       .pipe(take(1))
-      .subscribe(() =>
-        this.router.navigateByUrl("/tasks")
-      );
+      .subscribe(() => this.router.navigateByUrl("/tasks"));
   }
 }

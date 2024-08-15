@@ -18,17 +18,20 @@ export class ConfigInterceptor implements HttpInterceptor {
     private config: ClientConfigService,
     private virtualDb: VirtualDatabaseService,
     private syncService: SyncQueueService,
-    private pingService: PingService
+    private pingService: PingService,
   ) {}
 
   public intercept(
     request: HttpRequest<unknown>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     const hasServerConnection =
       this.config.isCustomServerUrlSet() && this.syncService.connectionStatus;
 
-    if (hasServerConnection || request.url.endsWith(this.pingService.pingRoute)) {
+    if (
+      hasServerConnection ||
+      request.url.endsWith(this.pingService.pingRoute)
+    ) {
       // use the real apis database
       return next.handle(request);
     }
@@ -42,7 +45,7 @@ export class ConfigInterceptor implements HttpInterceptor {
         body: {
           data,
         },
-      })
+      }),
     );
   }
 }

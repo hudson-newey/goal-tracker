@@ -6,15 +6,15 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-    selector: "app-delete-page",
-    templateUrl: "delete.component.html",
-    standalone: true,
+  selector: "app-delete-page",
+  templateUrl: "delete.component.html",
+  standalone: true,
 })
 export class DeleteGoalPageComponent implements OnInit {
   public constructor(
     private api: GoalsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   protected model?: Goal;
@@ -38,8 +38,6 @@ export class DeleteGoalPageComponent implements OnInit {
     this.api
       .deleteGoal(this.model?.ClientId)
       .pipe(take(1))
-      .subscribe(() =>
-        this.router.navigateByUrl("/goals")
-      );
+      .subscribe(() => this.router.navigateByUrl("/goals"));
   }
 }

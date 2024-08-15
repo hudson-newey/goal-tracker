@@ -12,17 +12,17 @@ import { NgIf, NgFor, DatePipe } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-    selector: "app-habit-page",
-    templateUrl: "show.component.html",
-    standalone: true,
-    imports: [
-        RouterLink,
-        FaIconComponent,
-        NgIf,
-        NgFor,
-        CalendarHeatmapComponent,
-        DatePipe,
-    ],
+  selector: "app-habit-page",
+  templateUrl: "show.component.html",
+  standalone: true,
+  imports: [
+    RouterLink,
+    FaIconComponent,
+    NgIf,
+    NgFor,
+    CalendarHeatmapComponent,
+    DatePipe,
+  ],
 })
 export class HabitShowPageComponent implements OnInit {
   public constructor(
@@ -61,7 +61,8 @@ export class HabitShowPageComponent implements OnInit {
           return;
         }
 
-        this.goalApi.getGoal(this.model?.Goal as Id)
+        this.goalApi
+          .getGoal(this.model?.Goal as Id)
           .pipe(take(1))
           .subscribe((response) => {
             this.goalModel = new Goal(response.data);

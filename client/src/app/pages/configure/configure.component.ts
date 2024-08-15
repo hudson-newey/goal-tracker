@@ -4,11 +4,11 @@ import { FormsModule } from "@angular/forms";
 import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service";
 
 @Component({
-    selector: "app-configure",
-    templateUrl: "./configure.component.html",
-    styleUrls: ["./configure.component.less"],
-    standalone: true,
-    imports: [FormsModule],
+  selector: "app-configure",
+  templateUrl: "./configure.component.html",
+  styleUrls: ["./configure.component.less"],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class ConfigurePageComponent {
   public constructor(

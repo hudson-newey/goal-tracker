@@ -5,16 +5,11 @@ import { NoContextMenuDirective } from "../../directives/no-context-menu.directi
 import { NgFor, NgIf } from "@angular/common";
 
 @Component({
-    selector: "app-habits-table",
-    templateUrl: "./habits-table.component.html",
-    styleUrl: "./habits-table.component.less",
-    standalone: true,
-    imports: [
-        NgFor,
-        NoContextMenuDirective,
-        RouterLink,
-        NgIf,
-    ],
+  selector: "app-habits-table",
+  templateUrl: "./habits-table.component.html",
+  styleUrl: "./habits-table.component.less",
+  standalone: true,
+  imports: [NgFor, NoContextMenuDirective, RouterLink, NgIf],
 })
 export class HabitsTableComponent {
   @Input({ required: true })
