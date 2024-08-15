@@ -8,4 +8,4 @@ import { RouterLinkActive, RouterLink } from "@angular/router";
   standalone: true,
   imports: [RouterLinkActive, RouterLink],
 })
-export class NavbarComponent { }
+export class NavbarComponent {}
