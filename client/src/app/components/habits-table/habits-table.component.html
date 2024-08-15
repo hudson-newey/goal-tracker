@@ -104,6 +104,7 @@
 </table>
 
 <button
+  *ngIf="antiHabits.length > 0"
   class="uk-button uk-button-default"
   (click)="showAntiHabits = !showAntiHabits"
 >
