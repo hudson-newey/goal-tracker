@@ -1,9 +1,0 @@
-FROM alpine:20-alpine
-WORKDIR /app
-
-COPY ./build/ /app
-
-# database -> server -> client server
-CMD database/dockerServer.sh && SERVER & && clientServer &;
-
-EXPOSE 8081

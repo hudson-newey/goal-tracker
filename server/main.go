@@ -18,7 +18,7 @@ func main() {
 	router.Use(cors.Default())
 
 	// create database connection
-	dbClient, ctx, _, err := databaseService.Connect("mongodb://127.0.0.1:27017")
+	dbClient, ctx, _, err := databaseService.Connect("mongodb://gt-database:27017")
 
 	if err != nil {
 		panic(err)

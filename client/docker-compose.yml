@@ -1,0 +1,8 @@
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gt-client
+    ports:
+      - "8080:8080"

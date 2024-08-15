@@ -1,6 +1,6 @@
 services:
-  mongo:
+  database:
     image: mongo:latest
-    container_name: goal-tracker
+    container_name: gt-database
     ports:
       - "27017:27017"

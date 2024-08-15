@@ -1,0 +1,27 @@
+services:
+  client:
+    extends:
+      file: client/docker-compose.yml
+      service: client
+    networks:
+      - gt-docker-network
+
+  server:
+    extends:
+      file: server/docker-compose.yml
+      service: server
+    depends_on:
+      - database
+    networks:
+      - gt-docker-network
+
+  database:
+    extends:
+      file: database/docker-compose.yml
+      service: database
+    networks:
+      - gt-docker-network
+
+networks:
+  gt-docker-network:
+    driver: bridge
