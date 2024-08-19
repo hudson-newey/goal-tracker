@@ -18,27 +18,13 @@ export class SyncQueueService extends AbstractService {
   ) {
     super();
 
+    // immediately update the connection status
+    this.updateConnectionStatus();
+
+    // set up a regular interval to check the connection status
+    // (defaults to every 5 seconds)
     this.timer = interval(5_000);
-
-    this.timer.subscribe(() => {
-      this.pingService
-        .hasServerConnection()
-        .pipe(first())
-        .subscribe((status) => {
-          this.connectionStatus = status;
-
-          // attempt to sync the virtual database to the real database every 50 seconds
-          // we primarily do this so that we can update the virtual database with the real database
-          if (this.ticksSinceLastSync >= 5 && this.connectionStatus) {
-            this.attemptSync();
-            this.ticksSinceLastSync = 0;
-          }
-
-          if (this.connectionStatus) {
-            this.ticksSinceLastSync++;
-          }
-        });
-    });
+    this.timer.subscribe(() => this.updateConnectionStatus());
   }
 
   public connectionStatus = false;
@@ -141,5 +127,25 @@ export class SyncQueueService extends AbstractService {
       hasInternetConnection &&
       serverConnection
     );
+  }
+
+  private updateConnectionStatus(): void {
+    this.pingService
+      .hasServerConnection()
+      .pipe(first())
+      .subscribe((status) => {
+        this.connectionStatus = status;
+
+        // attempt to sync the virtual database to the real database every 50 seconds
+        // we primarily do this so that we can update the virtual database with the real database
+        if (this.ticksSinceLastSync >= 5 && this.connectionStatus) {
+          this.attemptSync();
+          this.ticksSinceLastSync = 0;
+        }
+
+        if (this.connectionStatus) {
+          this.ticksSinceLastSync++;
+        }
+      });
   }
 }
