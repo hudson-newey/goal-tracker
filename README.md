@@ -4,7 +4,7 @@ A goal tracking app that I created because I didn't like the existing applicatio
 
 A live deployment (without device syncing) can be found at [grathium-industries.github.io/posts/deployments/habit-tracker](https://grathium-industries.github.io/posts/deployments/habit-tracker)
 
-![image](https://github.com/hudson-newey/habit-tracker/assets/33742269/1e11c5bf-43b1-4394-8e7b-36788710213b)
+![image](https://github.com/user-attachments/assets/6d28d062-83db-4130-9c7a-491585448eb0)
 
 ## Features
 
