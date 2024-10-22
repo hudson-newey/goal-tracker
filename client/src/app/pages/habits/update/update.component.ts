@@ -7,7 +7,7 @@ import { Id } from "src/app/types/helpers";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-  selector: "app-update",
+  selector: "app-update-habit",
   template: `<app-habit-form
     [creating]="false"
     [model]="model"

@@ -25,26 +25,45 @@ export class ConfigInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    const hasServerConnection =
-      this.config.isCustomServerUrlSet() && this.syncService.connectionStatus;
+    const hasServerConnection = this.config.isCustomServerUrlSet();
 
     if (
       hasServerConnection ||
       request.url.endsWith(this.pingService.pingRoute)
     ) {
       // use the real apis database
-      return next.handle(request);
+      return new Observable<HttpEvent<unknown>>((observer) => {
+        const subscription = next.handle(request).subscribe({
+          next: (event) => observer.next(event),
+          error: () => {
+            // if the request fails, because we could not connect to the server
+            // we will set the connection status to false
+            // and return the virtual database representation
+            this.syncService.connectionStatus = false;
+          },
+          complete: () => observer.complete(),
+        });
+
+        // Return the virtual database model until the request completes
+        observer.next(this.virtualDatabaseResponse(request));
+
+        // Cleanup subscription on unsubscribe
+        return () => subscription.unsubscribe();
+      });
     }
 
-    // use the virtual database
+    return this.virtualDatabaseResponse(request);
+  }
+
+  private virtualDatabaseResponse(
+    request: HttpRequest<unknown>,
+  ): any {
     const data = this.virtualDb.applyApiRequest(request);
 
     return of(
       new HttpResponse({
         status: 200,
-        body: {
-          data,
-        },
+        body: { data },
       }),
     );
   }

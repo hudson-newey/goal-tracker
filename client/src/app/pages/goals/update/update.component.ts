@@ -7,7 +7,7 @@ import { Id } from "src/app/types/helpers";
 import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form.component";
 
 @Component({
-  selector: "app-update",
+  selector: "app-update-goal",
   template: `
     <app-goal-form [creating]="false" [model]="model"></app-goal-form>
   `,

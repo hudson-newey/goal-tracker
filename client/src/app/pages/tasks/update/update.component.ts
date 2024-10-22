@@ -7,7 +7,7 @@ import { Id } from "src/app/types/helpers";
 import { TaskFormComponent } from "../../../components/forms/task-form/task-form.component";
 
 @Component({
-  selector: "app-update",
+  selector: "app-update-task",
   template: `<app-task-form
     [creating]="false"
     [model]="model"

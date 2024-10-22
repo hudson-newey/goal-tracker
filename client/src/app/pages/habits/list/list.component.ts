@@ -49,7 +49,6 @@ export class HabitListComponent implements OnInit {
   }
 
   public updateHabits(): void {
-    console.debug("fetch new habits");
     this.api
       .getHabits()
       .pipe(take(1))

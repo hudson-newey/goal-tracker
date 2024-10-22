@@ -33,8 +33,6 @@ export class SyncQueueService extends AbstractService {
   private syncQueueLocalStorageKey = "syncQueue";
 
   public attemptSync(): void {
-    console.debug("Attempting sync with database");
-
     const syncQueue =
       JSON.parse(localStorage.getItem("syncQueue") as string) ?? [];
 
@@ -94,8 +92,6 @@ export class SyncQueueService extends AbstractService {
     if (!this.config.isCustomServerUrlSet() || !this.connectionStatus) {
       return;
     }
-
-    console.debug("Attempting to sync from upstream");
 
     const virtualTables = this.virtualDatabase.knownVirtualTables();
 
