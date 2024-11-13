@@ -16,6 +16,7 @@ export interface IHabit {
   TargetValue?: number;
   TargetTime?: Seconds;
   DependsOn?: Id[];
+  LastUpdated?: string;
 }
 
 export class Habit extends AbstractModel<IHabit> implements IHabit {

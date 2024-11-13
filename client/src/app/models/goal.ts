@@ -8,6 +8,7 @@ export interface IGoal {
   Description?: string;
   Completed?: boolean;
   CompleteBy?: string;
+  LastUpdated?: string;
 }
 
 export class Goal extends AbstractModel<IGoal> implements IGoal {

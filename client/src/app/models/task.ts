@@ -11,6 +11,7 @@ export interface ITask {
   Importance?: number;
   CompleteBy?: string;
   DependsOn?: Id[];
+  LastUpdated?: string;
 }
 
 export class Task extends AbstractModel<ITask> implements ITask {

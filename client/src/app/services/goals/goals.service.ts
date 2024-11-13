@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
-import { createUrl } from "../helpers";
+import { createUrl, setLastUpdated } from "../helpers";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IGoal, Goal } from "../../models/goal";
@@ -36,6 +36,8 @@ export class GoalsService extends AbstractService {
 
   // POST /goals
   public createGoal(model: Goal): Observable<ApiHttpResponse<IGoal>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl("/goals");
     return this.http.post(endpoint, model) as Observable<
       ApiHttpResponse<IGoal>
@@ -44,6 +46,8 @@ export class GoalsService extends AbstractService {
 
   // PUT /goals/:goalId
   public updateGoal(model: Goal): Observable<ApiHttpResponse<IGoal>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl(`/goals/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<ApiHttpResponse<IGoal>>;
   }

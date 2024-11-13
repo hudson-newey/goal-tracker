@@ -7,4 +7,5 @@ type Goal struct {
 	Description string
 	Completed   bool
 	CompleteBy  string
+	LastUpdated string
 }

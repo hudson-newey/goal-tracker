@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { createUrl } from "../helpers";
+import { createUrl, setLastUpdated } from "../helpers";
 import { HttpClient } from "@angular/common/http";
 import { AbstractService } from "../abstract-service.service";
 import { ITask, Task } from "../../models/task";
@@ -31,6 +31,8 @@ export class TasksService extends AbstractService {
 
   // POST /tasks
   public createTask(model: Task): Observable<ApiHttpResponse<ITask>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl("/tasks");
     return this.http.post(endpoint, model) as Observable<
       ApiHttpResponse<ITask>
@@ -39,6 +41,8 @@ export class TasksService extends AbstractService {
 
   // PUT /tasks/:taskId
   public updateTask(model: Task): Observable<ApiHttpResponse<ITask>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl(`/tasks/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<ApiHttpResponse<ITask>>;
   }

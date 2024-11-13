@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AbstractService } from "../abstract-service.service";
-import { createUrl } from "../helpers";
+import { createUrl, setLastUpdated } from "../helpers";
 import { IHabit, Habit } from "../../models/habit";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
@@ -27,6 +27,7 @@ export class HabitsService extends AbstractService {
 
   // POST /habits
   public createHabit(model: Habit): Observable<ApiHttpResponse<IHabit>> {
+    setLastUpdated(model);
     const endpoint: string = createUrl("/habits");
     return this.http.post(endpoint, model) as Observable<
       ApiHttpResponse<IHabit>
@@ -35,6 +36,7 @@ export class HabitsService extends AbstractService {
 
   // PUT /habits/:habitId
   public updateHabit(model: Habit): Observable<ApiHttpResponse<IHabit>> {
+    setLastUpdated(model);
     const endpoint: string = createUrl(`/habits/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<
       ApiHttpResponse<IHabit>

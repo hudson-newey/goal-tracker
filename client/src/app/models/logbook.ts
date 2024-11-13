@@ -7,6 +7,7 @@ export interface ILogbook {
   Name?: string;
   CreatedAt?: string;
   Content?: string;
+  LastUpdated?: string;
 }
 
 export class Logbook extends AbstractModel<ILogbook> {

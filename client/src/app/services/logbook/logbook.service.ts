@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { createUrl } from "../helpers";
+import { createUrl, setLastUpdated } from "../helpers";
 import { ILogbook, Logbook } from "../../models/logbook";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
@@ -27,6 +27,8 @@ export class LogbookService extends AbstractService {
 
   // POST /logbooks
   public createLogbook(model: Logbook): Observable<ApiHttpResponse<ILogbook>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl("/logbooks");
     return this.http.post(endpoint, model) as Observable<
       ApiHttpResponse<ILogbook>
@@ -35,6 +37,8 @@ export class LogbookService extends AbstractService {
 
   // PUT /logbooks/:logbookId
   public updateLogbook(model: Logbook): Observable<ApiHttpResponse<ILogbook>> {
+    setLastUpdated(model);
+
     const endpoint: string = createUrl(`/logbooks/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<
       ApiHttpResponse<ILogbook>

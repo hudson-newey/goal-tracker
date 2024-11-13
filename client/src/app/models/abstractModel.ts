@@ -15,6 +15,7 @@ export abstract class AbstractModel<T> implements IAbstractModel {
   // the ClientID should be used to get tasks, habits, etc... and is used to uniquely identify the model
   public abstract Id: Required<Id>;
   public abstract ClientId: Required<Id>;
+  public abstract LastUpdated: Required<string>;
 
   public toString(): string {
     return JSON.stringify(this);

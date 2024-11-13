@@ -10,4 +10,5 @@ type Task struct {
 	Importance  int
 	CompleteBy  string   // in ISO-8601 format
 	DependsOn   []string // as _id
+	LastUpdated string
 }
