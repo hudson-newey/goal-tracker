@@ -8,7 +8,7 @@ import { Id } from "src/app/types/helpers";
 @Component({
   selector: "app-delete",
   templateUrl: "./delete.component.html",
-  styleUrls: ["./delete.component.less"],
+  styleUrl: "./delete.component.less",
   standalone: true,
 })
 export class LogbookDeleteComponent implements OnInit {

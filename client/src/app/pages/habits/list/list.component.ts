@@ -11,7 +11,7 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
 @Component({
   selector: "app-list-page",
   templateUrl: "list.component.html",
-  styleUrls: ["list.component.less"],
+  styleUrl: "list.component.less",
   standalone: true,
   imports: [RouterLink, HabitsTableComponent, NgIf],
 })

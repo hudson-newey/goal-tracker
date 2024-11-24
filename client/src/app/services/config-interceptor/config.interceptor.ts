@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
   HttpResponse,
 } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { noop, Observable, of } from "rxjs";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 import { SyncQueueService } from "../syncQueue/sync-queue.service";
@@ -25,39 +25,53 @@ export class ConfigInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    const hasServerConnection = this.config.isCustomServerUrlSet();
+    const hasCustomServer = this.config.isCustomServerUrlSet();
+    const hasServerConnection = this.syncService.connectionStatus;
+    const shouldPassthroughRequest = hasCustomServer && hasServerConnection;
 
-    if (
-      hasServerConnection ||
-      request.url.endsWith(this.pingService.pingRoute)
-    ) {
-      // use the real apis database
-      return new Observable<HttpEvent<unknown>>((observer) => {
-        const subscription = next.handle(request).subscribe({
-          next: (event) => observer.next(event),
-          error: () => {
-            // if the request fails, because we could not connect to the server
-            // we will set the connection status to false
-            // and return the virtual database representation
-            this.syncService.connectionStatus = false;
-          },
-          complete: () => observer.complete(),
-        });
+    const isPingRoute = request.url.endsWith(this.pingService.pingRoute);
 
-        // Return the virtual database model until the request completes
-        observer.next(this.virtualDatabaseResponse(request));
-
-        // Cleanup subscription on unsubscribe
-        return () => subscription.unsubscribe();
-      });
+    if (shouldPassthroughRequest || isPingRoute) {
+      return this.realDatabaseResponse(request, next, isPingRoute);
     }
 
     return this.virtualDatabaseResponse(request);
   }
 
+  private realDatabaseResponse(
+    request: HttpRequest<unknown>,
+    next: HttpHandler,
+    isPingRoute: boolean
+  ): Observable<HttpEvent<unknown>> {
+    return new Observable<HttpEvent<unknown>>((observer) => {
+      // use the real apis database
+      const subscription = next.handle(request).subscribe({
+        next: (data) => observer.next(data),
+        error: () => {
+          // if the request fails, because we could not connect to the server
+          // we will set the connection status to false
+          // and return the virtual database representation
+          this.syncService.connectionStatus = false;
+
+          // if it is a ping route we do not want to commit it to the virtual
+          // database because it would return a stale response
+          if (isPingRoute) {
+            return noop();
+          }
+
+          return this.virtualDatabaseResponse(request);
+        },
+        complete: () => observer.complete(),
+      });
+
+      // Cleanup subscription on unsubscribe
+      return () => subscription.unsubscribe();
+    });
+  }
+
   private virtualDatabaseResponse(
     request: HttpRequest<unknown>,
-  ): any {
+  ): Observable<HttpEvent<unknown>> {
     const data = this.virtualDb.applyApiRequest(request);
 
     return of(

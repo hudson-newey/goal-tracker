@@ -4,7 +4,7 @@ import { RouterLinkActive, RouterLink } from "@angular/router";
 @Component({
   selector: "app-navbar",
   templateUrl: "navbar.component.html",
-  styleUrls: ["navbar.component.less"],
+  styleUrl: "navbar.component.less",
   standalone: true,
   imports: [RouterLinkActive, RouterLink],
 })

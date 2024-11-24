@@ -11,7 +11,6 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
 @Component({
   selector: "app-goals-page",
   templateUrl: "list.component.html",
-  styleUrls: ["list.component.less"],
   standalone: true,
   imports: [RouterLink, NgFor, FormsModule, NgIf],
 })

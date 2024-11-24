@@ -7,7 +7,7 @@ import { NgFor, NgClass, NgIf, DatePipe } from "@angular/common";
 @Component({
   selector: "app-tasks-table",
   templateUrl: "./tasks-table.component.html",
-  styleUrls: ["./tasks-table.component.less"],
+  styleUrl: "./tasks-table.component.less",
   standalone: true,
   imports: [NgFor, NgClass, FormsModule, RouterLink, NgIf, DatePipe],
 })

@@ -86,6 +86,13 @@ export class SyncQueueService extends AbstractService {
           .subscribe(() => successCallback());
       }
     });
+
+    // we attempt to sync again after we have completed in the hopes that we
+    // will not have any more information to push and we can short-circut and
+    // start pulling from the database
+    // we attempt to push further data to the database in the rare case that
+    // the user has created more items to push in the time it took to sync
+    this.attemptSync();
   }
 
   public syncFromDatabase(): void {

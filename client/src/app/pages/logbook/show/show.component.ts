@@ -9,7 +9,7 @@ import { DatePipe } from "@angular/common";
 @Component({
   selector: "app-show",
   templateUrl: "./show.component.html",
-  styleUrls: ["./show.component.less"],
+  styleUrl: "./show.component.less",
   standalone: true,
   imports: [RouterLink, DatePipe],
 })

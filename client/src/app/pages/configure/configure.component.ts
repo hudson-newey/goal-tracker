@@ -6,7 +6,7 @@ import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service"
 @Component({
   selector: "app-configure",
   templateUrl: "./configure.component.html",
-  styleUrls: ["./configure.component.less"],
+  styleUrl: "./configure.component.less",
   standalone: true,
   imports: [FormsModule],
 })
@@ -39,6 +39,11 @@ export class ConfigurePageComponent {
 
     if (this.customServerUrl) {
       this.configService.setCustomServerUrl(this.customServerUrl);
+
+      // we force sync as soon as we make a server connection so that the
+      // client will have the most recent data
+      this.forceSync();
+
       this.formFeedback = "Custom server URL saved!";
     } else {
       this.formFeedback = "Please enter a valid server URL.";
@@ -47,6 +52,17 @@ export class ConfigurePageComponent {
 
   protected clearCustomServerUrl(): void {
     this.customServerUrl = "";
+
+    // TODO: setting the connection to false should be done in the config
+    // service. However, this currently results in a circular DI
+    // I have chosen to set the sync service status here because it's currently
+    // only used here and I don't want to waste time debugging a circular DI
+    //
+    // I do a force sync before disconnecting to minimise the chances of
+    // conflicting data when reconnecting and so that the server has the
+    // most up-to-date representation of the client
+    this.forceSync();
+    this.syncService.connectionStatus = false;
 
     this.configService.clearCustomServerUrl();
 

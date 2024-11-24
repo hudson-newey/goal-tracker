@@ -11,7 +11,7 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
 @Component({
   selector: "app-tasks-page",
   templateUrl: "list.component.html",
-  styleUrls: ["list.component.less"],
+  styleUrl: "list.component.less",
   standalone: true,
   imports: [RouterLink, TasksTableComponent, NgIf],
 })
@@ -30,6 +30,14 @@ export class TasksPageComponent implements OnInit {
 
   protected get incompleteTasks(): Task[] {
     return this.tasks.filter((task) => !task.Completed);
+  }
+
+  protected get hasCompletedTasks(): boolean {
+    return this.completedTasks.length > 0;
+  }
+
+  protected get hasIncompleteTasks(): boolean {
+    return this.incompleteTasks.length > 0;
   }
 
   public ngOnInit(): void {

@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 @Component({
   selector: "app-new",
   templateUrl: "./new.component.html",
-  styleUrls: ["./new.component.less"],
+  styleUrl: "./new.component.less",
   standalone: true,
   imports: [FormsModule],
 })

@@ -15,8 +15,8 @@ export class VirtualDatabaseService extends AbstractService {
   // TODO: move this to the sync queue service
   // It's currently here because of recursive interceptors
   public pushToSyncQueue(request: HttpRequest<unknown>): void {
-    const syncQueue =
-      JSON.parse(localStorage.getItem("syncQueue") as string) ?? [];
+    const syncQueue = JSON.parse(localStorage.getItem("syncQueue") as string) ??
+      [];
 
     syncQueue.push(request);
 
@@ -24,12 +24,24 @@ export class VirtualDatabaseService extends AbstractService {
   }
 
   public knownVirtualTables(): string[] {
-    const foundTables =
-      JSON.parse(
-        localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
-      ) ?? [];
+    const foundTables = localStorage.getItem(
+      this.knownVirtualTablesLocalStorageKey,
+    );
+    if (!foundTables) {
+      return [];
+    }
 
-    return foundTables.filter((x: string) => !!x);
+    const parsedTables = JSON.parse(foundTables);
+    if (!Array.isArray(parsedTables)) {
+      console.warn(
+        "Expected known virtual tables to be a string array, found ",
+        typeof parsedTables,
+      );
+      console.warn("Falling back to no known virtual tables");
+      return [];
+    }
+
+    return parsedTables.filter((x: string) => !!x);
   }
 
   public dropTable(tableName: string): void {
@@ -71,7 +83,14 @@ export class VirtualDatabaseService extends AbstractService {
 
     const virtualTable = this.tableValue(virtualTableName);
 
+    // we can short-circut if we intercept an options request
+    if (request.method === "OPTIONS") {
+      return;
+    }
+
     if (request.method === "GET") {
+      // if the request has an "id" attribute in its route, we want to handle
+      // it as a "show" request for a singular item in the database
       if (id) {
         // TODO: this is not correct server side (should be under the habits/task routes)
         // because there is a route /goals/:id/habits and /goals/:id/tasks to get the
@@ -80,16 +99,18 @@ export class VirtualDatabaseService extends AbstractService {
         if (virtualTableName === "goals" && request.url.split("/").length > 3) {
           const associatedTableName = request.url.split("/")[3];
 
-          const value = this.tableValue(associatedTableName).filter(
+          return this.tableValue(associatedTableName).filter(
             (model: any) => model.Goal == id,
           );
-
-          return value;
         }
 
         // TODO: Correctly convert these types instead of using ==
         return virtualTable.find((item: any) => item.ClientId == id);
       }
+
+      // if there a GET request for a known table, but there is no id specified
+      // it is a list request, and we should return all of the items
+      return this.tableValue(virtualTableName);
     }
 
     if (request.method === "POST") {
@@ -124,8 +145,8 @@ export class VirtualDatabaseService extends AbstractService {
       this.updateTable(virtualTableName, JSON.stringify(virtualTable));
     }
 
-    const tableValue = this.tableValue(virtualTableName);
-    return tableValue;
+    console.error("could not handle request", virtualTableName, request);
+    return [];
   }
 
   private tableValue(tableName: string): unknown[] {
@@ -143,10 +164,9 @@ export class VirtualDatabaseService extends AbstractService {
   }
 
   private addToKnownTables(tableName: string): void {
-    const knownTables =
-      JSON.parse(
-        localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
-      ) ?? [];
+    const knownTables = JSON.parse(
+      localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
+    ) ?? [];
 
     if (knownTables.includes(tableName)) {
       return;

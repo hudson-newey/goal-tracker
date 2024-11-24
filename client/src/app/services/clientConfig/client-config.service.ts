@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { environment } from "src/environment";
+import { SyncQueueService } from "../syncQueue/sync-queue.service";
 
 export const customServerStorageKey = "customServerUrl" as const;
 
@@ -21,6 +22,7 @@ export class ClientConfigService extends AbstractService {
 
   public clearCustomServerUrl(): void {
     localStorage.removeItem(customServerStorageKey);
+    environment.endpoint = "";
   }
 
   public isCustomServerUrlSet(): boolean {
