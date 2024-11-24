@@ -28,6 +28,7 @@ export class Task extends AbstractModel<ITask> implements ITask {
   public Importance: number = 1;
   public CompleteBy!: string;
   public DependsOn!: Id[];
+  public LastUpdated!: string;
 
   public override get ViewUrl(): any[] {
     return ["/tasks", this.ClientId];

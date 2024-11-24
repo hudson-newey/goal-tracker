@@ -10,7 +10,5 @@ WORKDIR /app
 
 RUN pnpm build
 
-COPY ./dist/client /app
-
-EXPOSE 8080
+EXPOSE 8888
 CMD [ "pnpm", "start:prod" ]

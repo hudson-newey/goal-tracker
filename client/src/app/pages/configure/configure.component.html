@@ -44,7 +44,9 @@
   />
 
   <datalist id="custom-server-suggestions">
-    <option value="http://localhost:8081">http://localhost:8081</option>
+    @for(suggestion of serverSuggestions; track suggestion) {
+    <option [value]="suggestion">{{ suggestion }}</option>
+    }
   </datalist>
 
   <div class="action-buttons">

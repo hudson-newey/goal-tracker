@@ -4,5 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: gt-server
+    environment:
+      - DATABASE_URL=mongodb://gt-database:27017
     ports:
       - "8081:8081"

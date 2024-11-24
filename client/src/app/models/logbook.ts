@@ -20,6 +20,7 @@ export class Logbook extends AbstractModel<ILogbook> {
   public Name!: string;
   public CreatedAt!: string;
   public Content!: string;
+  public LastUpdated!: string;
 
   public override get ViewUrl(): any[] {
     return ["/logbook", this.ClientId];

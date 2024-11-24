@@ -5,4 +5,4 @@ services:
       dockerfile: Dockerfile
     container_name: gt-client
     ports:
-      - "8080:8080"
+      - "8888:8888"

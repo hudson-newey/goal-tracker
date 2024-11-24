@@ -1,9 +1,9 @@
 {
-  "name": "client",
+  "name": "gt-client",
   "version": "0.0.0",
   "scripts": {
     "start": "ng serve --host 0.0.0.0 --disable-host-check",
-    "start:prod": "http-server ./dist/client/browser",
+    "start:prod": "http-server ./dist/client/browser --port 8888",
     "build": "ng build && cp ./src/manifest.webmanifest ./dist/client/manifest.webmanifest",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -37,6 +37,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public TargetValue!: number;
   public TargetTime!: Seconds;
   public DependsOn!: Id[];
+  public LastUpdated!: string;
 
   public override get ViewUrl(): any[] {
     return [`/habits`, this.ClientId];

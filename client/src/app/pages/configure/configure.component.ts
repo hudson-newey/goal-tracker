@@ -19,6 +19,10 @@ export class ConfigurePageComponent {
   protected customServerUrl: string =
     this.configService.getCustomServerUrl() ?? "";
   protected formFeedback: string = "";
+  protected serverSuggestions: string[] = [
+    "http://localhost:8081",
+    "http://127.0.0.1:8081",
+  ];
 
   protected get isSyncServerSet(): boolean {
     return this.configService.isCustomServerUrlSet();
