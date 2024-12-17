@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 import { Habit } from "src/app/models/habit";
 import { RouterLink } from "@angular/router";
 import { NoContextMenuDirective } from "../../directives/no-context-menu.directive";
@@ -12,11 +12,9 @@ import { NoContextMenuDirective } from "../../directives/no-context-menu.directi
 export class HabitsTableComponent {
   public readonly models = input.required<Habit[]>();
 
-  @Output()
-  public changeState = new EventEmitter<Habit>();
+  public readonly changeState = output<Habit>();
 
-  @Output()
-  public decrementState = new EventEmitter<Habit>();
+  public readonly decrementState = output<Habit>();
 
   protected showAntiHabits = false;
 

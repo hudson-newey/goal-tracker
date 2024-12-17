@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 import { Task } from "src/app/models/task";
 import { RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -15,6 +15,5 @@ export class TasksTableComponent {
 
   public readonly models = input<Task[]>([]);
 
-  @Output()
-  public changeState = new EventEmitter<Task>();
+  public readonly changeState = output<Task>();
 }

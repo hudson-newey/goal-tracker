@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, input } from "@angular/core";
+import { Component, Input, input, output } from "@angular/core";
 import { interval, Observable, of } from "rxjs";
 import { Seconds } from "src/app/types/units";
 
@@ -20,8 +20,7 @@ export class TimerComponent {
   @Input()
   public value: Seconds = 0;
 
-  @Output()
-  public valueChange = new EventEmitter<Seconds>();
+  public readonly valueChange = output<Seconds>();
 
   private timer?: Observable<number>;
 
