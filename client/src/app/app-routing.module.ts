@@ -1,60 +1,42 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
-import { GoalPageComponent } from "./pages/goals/goal/show.component";
-import { GoalsPageComponent } from "./pages/goals/list/list.component";
-import { NewGoalPageComponent } from "./pages/goals/new/new.component";
-import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component";
-import { HabitShowPageComponent } from "./pages/habits/habit/show.component";
-import { HabitListComponent } from "./pages/habits/list/list.component";
-import { NewHabitPage } from "./pages/habits/new/new.component";
-import { SchedulePageComponent } from "./pages/schedule/schedule.component";
-import { DeleteTaskPageComponent } from "./pages/tasks/delete/delete.component";
-import { TasksPageComponent } from "./pages/tasks/list/list.component";
-import { NewTaskPageComponent } from "./pages/tasks/new/new.component";
-import { TaskPageComponent } from "./pages/tasks/task/show.component";
-import { LogbookListComponent } from "./pages/logbook/list/list.component";
-import { LogbookNewComponent } from "./pages/logbook/new/new.component";
-import { LogbookShowComponent } from "./pages/logbook/show/show.component";
-import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
-import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
-import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
-import { TasksUpdateComponent } from "./pages/tasks/update/update.component";
-import { ConfigurePageComponent } from "./pages/configure/configure.component";
-import { LogbookEditComponent } from "./pages/logbook/edit/edit.component";
 
+// prettier wants to expand each route object property onto its own line
+// however, I think that having each route on its own line is more readable
+// even if it does exceed the 80 and 120 character limit
+// prettier-ignore
 const routes: Routes = [
   // goals
-  { path: "goals", component: GoalsPageComponent },
-  { path: "goals/new", component: NewGoalPageComponent },
-  { path: "goals/:id", component: GoalPageComponent },
-  { path: "goals/:id/delete", component: DeleteGoalPageComponent },
-  { path: "goals/:id/edit", component: GoalsUpdateComponent },
+  { path: "goals", loadComponent: () => import("./pages/goals/list/list.component").then((m) => m.GoalsPageComponent) },
+  { path: "goals/new", loadComponent: () => import("./pages/goals/new/new.component").then( (m) => m.NewGoalPageComponent) },
+  { path: "goals/:id", loadComponent: () => import("./pages/goals/show/show.component").then( (m) => m.GoalPageComponent) },
+  { path: "goals/:id/delete", loadComponent: () => import("./pages/goals/delete/delete.component").then( (m) => m.DeleteGoalPageComponent,) },
+  { path: "goals/:id/edit", loadComponent: () => import("./pages/goals/update/update.component").then( (m) => m.GoalsUpdateComponent,) },
 
   // habits
-  { path: "", component: HabitListComponent },
-  { path: "habits/new", component: NewHabitPage },
-  { path: "habits/:id", component: HabitShowPageComponent },
-  { path: "habits/:id/delete", component: DeleteHabitPageComponent },
-  { path: "habits/:id/edit", component: HabitsUpdateComponent },
+  { path: "", loadComponent: () => import("./pages/habits/list/list.component").then( (m) => m.HabitListComponent) },
+  { path: "habits/new", loadComponent: () => import("./pages/habits/new/new.component").then((m) => m.NewHabitPage) },
+  { path: "habits/:id", loadComponent: () => import("./pages/habits/show/show.component").then( (m) => m.HabitShowPageComponent) },
+  { path: "habits/:id/delete", loadComponent: () => import("./pages/habits/delete/delete.component").then( (m) => m.DeleteHabitPageComponent) },
+  { path: "habits/:id/edit", loadComponent: () => import("./pages/habits/update/update.component").then( (m) => m.HabitsUpdateComponent) },
 
   // tasks
-  { path: "tasks", component: TasksPageComponent },
-  { path: "tasks/new", component: NewTaskPageComponent },
-  { path: "tasks/:id", component: TaskPageComponent },
-  { path: "tasks/:id/delete", component: DeleteTaskPageComponent },
-  { path: "tasks/:id/edit", component: TasksUpdateComponent },
+  { path: "tasks", loadComponent: () => import("./pages/tasks/list/list.component").then( (m) => m.TasksPageComponent) },
+  { path: "tasks/new", loadComponent: () => import("./pages/tasks/new/new.component").then( (m) => m.NewTaskPageComponent) },
+  { path: "tasks/:id", loadComponent: () => import("./pages/tasks/show/show.component").then( (m) => m.TaskPageComponent) },
+  { path: "tasks/:id/delete", loadComponent: () => import("./pages/tasks/delete/delete.component").then( (m) => m.DeleteTaskPageComponent) },
+  { path: "tasks/:id/edit", loadComponent: () => import("./pages/tasks/update/update.component").then( (m) => m.TasksUpdateComponent) },
 
   // logbook
-  { path: "logbook", component: LogbookListComponent },
-  { path: "logbook/new", component: LogbookNewComponent },
-  { path: "logbook/:id", component: LogbookShowComponent },
-  { path: "logbook/:id/delete", component: LogbookDeleteComponent },
-  { path: "logbook/:id/edit", component: LogbookEditComponent },
+  { path: "logbook", loadComponent: () => import("./pages/logbook/list/list.component").then( (m) => m.LogbookListComponent) },
+  { path: "logbook/new", loadComponent: () => import("./pages/logbook/new/new.component").then( (m) => m.LogbookNewComponent) },
+  { path: "logbook/:id", loadComponent: () => import("./pages/logbook/show/show.component").then( (m) => m.LogbookShowComponent) },
+  { path: "logbook/:id/delete", loadComponent: () => import("./pages/logbook/delete/delete.component").then( (m) => m.LogbookDeleteComponent) },
+  { path: "logbook/:id/edit", loadComponent: () => import("./pages/logbook/edit/edit.component").then( (m) => m.LogbookEditComponent) },
 
   // general
-  { path: "schedule", component: SchedulePageComponent },
-  { path: "configure", component: ConfigurePageComponent },
+  { path: "schedule", loadComponent: () => import("./pages/schedule/schedule.component").then( (m) => m.SchedulePageComponent) },
+  { path: "configure", loadComponent: () => import("./pages/configure/configure.component").then( (m) => m.ConfigurePageComponent) },
 ];
 
 @NgModule({
