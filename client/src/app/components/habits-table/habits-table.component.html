@@ -9,108 +9,107 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let model of positiveHabits">
-      <td>
-        @if (!model.IsQuantifiable || model.IsCompletedToday) {
-          <!-- This template is used when a habit can be completed or not completed -->
-          <input
-            [checked]="model.IsCompletedToday"
-            (change)="changeState.emit(model)"
-            type="checkbox"
-            class="uk-checkbox"
-          />
-        } @else {
-          <!--
-          This template is used when a habit can have a value attached
-          eg. run x km or drank x glasses of water today
-        --->
-          <button
-            class="uk-button uk-button-default increment-button"
-            (click)="changeState.emit(model)"
-            (contextmenu)="decrementState.emit(model)"
-            appNoContextMenu
-          >
-            {{ model?.TimesCompletedToday ?? 0 }}
-          </button>
-        }
-      </td>
+    @for (model of positiveHabits; track model) {
+      <tr>
+        <td>
+          @if (!model.IsQuantifiable || model.IsCompletedToday) {
+            <!-- This template is used when a habit can be completed or not completed -->
+            <input
+              [checked]="model.IsCompletedToday"
+              (change)="changeState.emit(model)"
+              type="checkbox"
+              class="uk-checkbox"
+              />
+          } @else {
+            <!--
+            This template is used when a habit can have a value attached
+            eg. run x km or drank x glasses of water today
+            --->
+            <button
+              class="uk-button uk-button-default increment-button"
+              (click)="changeState.emit(model)"
+              (contextmenu)="decrementState.emit(model)"
+              appNoContextMenu
+              >
+              {{ model?.TimesCompletedToday ?? 0 }}
+            </button>
+          }
+        </td>
+        <td>
+          <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
+            {{ model.Name }}
+          </a>
+        </td>
+        <td class="hide-in-mobile">
+          @if (model.Description) {
+            <p class="description">
+              {{ model.Description }}
+            </p>
+          } @else {
+            <i>No description</i>
+          }
+        </td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+            >
+            View
+          </a>
+        </td>
+      </tr>
+    }
 
-      <td>
-        <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
-          {{ model.Name }}
-        </a>
-      </td>
-
-      <td class="hide-in-mobile">
-        <ng-container *ngIf="model.Description; else defaultDescription">
-          <p class="description">
-            {{ model.Description }}
-          </p>
-        </ng-container>
-      </td>
-
-      <td>
-        <a
-          [routerLink]="model.ViewUrl"
-          class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-        >
-          View
-        </a>
-      </td>
-    </tr>
-
-    <ng-container *ngIf="showAntiHabits">
+    @if (showAntiHabits) {
       <tr>
         <td colspan="4">
           <h3>Anti habits</h3>
         </td>
       </tr>
-
-      <tr *ngFor="let model of antiHabits">
-        <td>
-          <input
-            [checked]="model.IsCompletedToday"
-            (change)="changeState.emit(model)"
-            type="checkbox"
-            class="uk-checkbox"
-          />
-        </td>
-
-        <td>
-          <a [routerLink]="model.ViewUrl" class="uk-link uk -text-secondary">
-            {{ model.Name }}
-          </a>
-        </td>
-
-        <td class="hide-in-mobile">
-          <ng-container *ngIf="model.Description; else defaultDescription">
-            <p class="description">
-              {{ model.Description }}
-            </p>
-          </ng-container>
-        </td>
-
-        <td>
-          <a
-            [routerLink]="model.ViewUrl"
-            class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-          >
-            View
-          </a>
-        </td>
-      </tr>
-    </ng-container>
+      @for (model of antiHabits; track model) {
+        <tr>
+          <td>
+            <input
+              [checked]="model.IsCompletedToday"
+              (change)="changeState.emit(model)"
+              type="checkbox"
+              class="uk-checkbox"
+              />
+          </td>
+          <td>
+            <a [routerLink]="model.ViewUrl" class="uk-link uk -text-secondary">
+              {{ model.Name }}
+            </a>
+          </td>
+          <td class="hide-in-mobile">
+            @if (model.Description) {
+              <p class="description">
+                {{ model.Description }}
+              </p>
+            } @else {
+              <i>No description</i>
+            }
+          </td>
+          <td>
+            <a
+              [routerLink]="model.ViewUrl"
+              class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+              >
+              View
+            </a>
+          </td>
+        </tr>
+      }
+    }
   </tbody>
 </table>
 
-<button
-  *ngIf="antiHabits.length > 0"
-  class="uk-button uk-button-default"
-  (click)="showAntiHabits = !showAntiHabits"
->
-  <span> {{ showAntiHabits ? "Hide" : "Show" }} anti habits </span>
-</button>
+@if (antiHabits.length > 0) {
+  <button
+    class="uk-button uk-button-default"
+    (click)="showAntiHabits = !showAntiHabits"
+    >
+    <span> {{ showAntiHabits ? "Hide" : "Show" }} anti habits </span>
+  </button>
+}
 
-<ng-template #defaultDescription>
-  <i>No description</i>
-</ng-template>

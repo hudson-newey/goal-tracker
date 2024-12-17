@@ -17,11 +17,13 @@
     ></app-habits-table>
   </section>
 
-  <section *ngIf="completedHabits.length > 0">
-    <h2>Completed Habits</h2>
-    <app-habits-table
-      [models]="completedHabits"
-      (changeState)="uncompleteHabit($event)"
-    ></app-habits-table>
-  </section>
+  @if (completedHabits.length > 0) {
+    <section>
+      <h2>Completed Habits</h2>
+      <app-habits-table
+        [models]="completedHabits"
+        (changeState)="uncompleteHabit($event)"
+      ></app-habits-table>
+    </section>
+  }
 </main>

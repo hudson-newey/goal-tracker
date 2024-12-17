@@ -3,7 +3,7 @@ import { take } from "rxjs";
 import { Goal, IGoal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf } from "@angular/common";
+
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 import { VibrationService } from "src/app/services/vibration/vibration.service";
@@ -12,7 +12,7 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   selector: "app-goals-page",
   templateUrl: "list.component.html",
   standalone: true,
-  imports: [RouterLink, NgFor, FormsModule, NgIf],
+  imports: [RouterLink, FormsModule],
 })
 export class GoalsPageComponent implements OnInit {
   public constructor(

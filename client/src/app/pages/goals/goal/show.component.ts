@@ -6,13 +6,13 @@ import { Habit } from "src/app/models/habit";
 import { Task } from "src/app/models/task";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
-import { NgFor, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-goal-page",
   templateUrl: "show.component.html",
   standalone: true,
-  imports: [RouterLink, NgFor, DatePipe],
+  imports: [RouterLink, DatePipe],
 })
 export class GoalPageComponent implements OnInit {
   public constructor(

@@ -20,24 +20,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let model of logbooks">
-        <td>
-          <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
-            {{ model.Name }}
-          </a>
-        </td>
-
-        <td>{{ model.CreatedAt }}</td>
-
-        <td>
-          <a
-            [routerLink]="model.ViewUrl"
-            class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-          >
-            View
-          </a>
-        </td>
-      </tr>
+      @for (model of logbooks; track model) {
+        <tr>
+          <td>
+            <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
+              {{ model.Name }}
+            </a>
+          </td>
+          <td>{{ model.CreatedAt }}</td>
+          <td>
+            <a
+              [routerLink]="model.ViewUrl"
+              class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+              >
+              View
+            </a>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </section>

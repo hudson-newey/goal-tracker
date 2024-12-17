@@ -13,11 +13,12 @@
   ></app-tasks-table>
 </section>
 
-<section *ngIf="completedTasks.length > 0">
-  <h2>Completed Tasks</h2>
-
-  <app-tasks-table
-    [models]="completedTasks"
-    (changeState)="updateTask($event)"
-  ></app-tasks-table>
-</section>
+@if (completedTasks.length > 0) {
+  <section>
+    <h2>Completed Tasks</h2>
+    <app-tasks-table
+      [models]="completedTasks"
+      (changeState)="updateTask($event)"
+    ></app-tasks-table>
+  </section>
+}

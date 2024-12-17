@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { Task, ITask } from "src/app/models/task";
 import { TasksService } from "src/app/services/tasks/tasks.service";
-import { NgIf } from "@angular/common";
+
 import { TasksTableComponent } from "../../../components/tasks-table/tasks-table.component";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
@@ -13,7 +13,7 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   templateUrl: "list.component.html",
   styleUrl: "list.component.less",
   standalone: true,
-  imports: [RouterLink, TasksTableComponent, NgIf],
+  imports: [RouterLink, TasksTableComponent],
 })
 export class TasksPageComponent implements OnInit {
   public constructor(

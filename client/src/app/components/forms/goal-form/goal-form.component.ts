@@ -8,7 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { ITask, Task } from "src/app/models/task";
 import { Habit, IHabit } from "src/app/models/habit";
 import { GptService } from "src/app/services/gpt/gpt.service";
-import { CommonModule } from "@angular/common";
+
 import { HabitsService } from "src/app/services/habits/habits.service";
 import { TasksService } from "src/app/services/tasks/tasks.service";
 
@@ -17,7 +17,7 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
   templateUrl: "./goal-form.component.html",
   styleUrl: "./goal-form.component.less",
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   public constructor(

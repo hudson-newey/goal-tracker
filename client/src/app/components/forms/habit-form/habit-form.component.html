@@ -23,9 +23,9 @@
   <label class="uk-form-label">
     Associated Goal
     <select name="goal" class="uk-select" [(ngModel)]="model.Goal">
-      <ng-container *ngFor="let goal of goals$ | async">
+      @for (goal of goals$ | async; track goal) {
         <option [value]="goal.ClientId">{{ goal.Name }}</option>
-      </ng-container>
+      }
     </select>
   </label>
 
@@ -36,7 +36,7 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.AntiHabit"
-      />
+        />
       Anti Habit
     </label>
 
@@ -46,7 +46,7 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.IsQuantifiable"
-      />
+        />
       Quantifiable
     </label>
 
@@ -56,45 +56,47 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.IsTimeBased"
-      />
+        />
       Time-Based
     </label>
   </div>
 
-  <div *ngIf="model.IsQuantifiable" class="uk-form-label target-value">
-    <label>
-      Target Value
+  @if (model.IsQuantifiable) {
+    <div class="uk-form-label target-value">
+      <label>
+        Target Value
+        <input
+          name="target-value"
+          type="number"
+          class="uk-input"
+          placeholder="e.g. '5' (km run)"
+          [(ngModel)]="model.TargetValue"
+          />
+      </label>
+    </div>
+  }
 
-      <input
-        name="target-value"
-        type="number"
-        class="uk-input"
-        placeholder="e.g. '5' (km run)"
-        [(ngModel)]="model.TargetValue"
-      />
-    </label>
-  </div>
-
-  <div *ngIf="model.IsTimeBased" class="uk-form-label target-value">
-    <label>
-      Target Time (Seconds)
-
-      <input
-        name="target-time"
-        type="number"
-        class="uk-input"
-        placeholder="e.g. '60' (minutes of exercise)"
-        [(ngModel)]="model.TargetTime"
-      />
-    </label>
-  </div>
+  @if (model.IsTimeBased) {
+    <div class="uk-form-label target-value">
+      <label>
+        Target Time (Seconds)
+        <input
+          name="target-time"
+          type="number"
+          class="uk-input"
+          placeholder="e.g. '60' (minutes of exercise)"
+          [(ngModel)]="model.TargetTime"
+          />
+      </label>
+    </div>
+  }
 
   <div>
     <button
       type="submit"
       class="uk-button uk-button-primary uk-margin-top"
       (click)="submitForm()"
-    >
+      >
       {{ creating ? "Create" : "Update" }} Habit
     </button>
   </div>

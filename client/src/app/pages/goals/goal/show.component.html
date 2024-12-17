@@ -3,13 +3,13 @@
 <button
   class="uk-button-secondary uk-button uk-margin-small-right uk-margin-small-top"
   [routerLink]="model?.EditUrl"
->
+  >
   Edit: {{ model?.Name }}
 </button>
 <button
   class="uk-button-danger uk-button uk-margin-small-top"
   [routerLink]="model?.DeleteUrl"
->
+  >
   Delete: {{ model?.Name }}
 </button>
 
@@ -21,18 +21,22 @@
 
 <p>Associated Habits:</p>
 <ul>
-  <li *ngFor="let habit of associatedHabits">
-    <a [routerLink]="habit.ViewUrl">
-      {{ habit.Name }}
-    </a>
-  </li>
+  @for (habit of associatedHabits; track habit) {
+    <li>
+      <a [routerLink]="habit.ViewUrl">
+        {{ habit.Name }}
+      </a>
+    </li>
+  }
 </ul>
 
 <p>Associated Tasks:</p>
 <ul>
-  <li *ngFor="let task of associatedTasks">
-    <a [routerLink]="task.ViewUrl">
-      {{ task.Name }}
-    </a>
-  </li>
+  @for (task of associatedTasks; track task) {
+    <li>
+      <a [routerLink]="task.ViewUrl">
+        {{ task.Name }}
+      </a>
+    </li>
+  }
 </ul>

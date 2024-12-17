@@ -29,55 +29,61 @@
     type="submit"
     class="uk-button uk-button-primary uk-margin-top"
     (click)="submitForm()"
-  >
+    >
     {{ creating ? "Create" : "Update" }} Goal
   </button>
 
   <hr />
 
   <!--
-    TODO: move the AI functionality to another location
-    eg. I was thinking about inline with the name or in a sidebar
+  TODO: move the AI functionality to another location
+  eg. I was thinking about inline with the name or in a sidebar
   --->
   <div>
     <button
       type="button"
       class="uk-button uk-button-default uk-margin-top uk-margin-bottom"
       (click)="getAiTasksAndHabits()"
-    >
+      >
       Generate AI Tasks and Habits
     </button>
 
-    <div *ngIf="aiTasks.length > 0">
-      <h2>Suggested Tasks</h2>
+    @if (aiTasks.length > 0) {
+      <div>
+        <h2>Suggested Tasks</h2>
+        <ul class="uk-list uk-list-disc">
+          @for (task of aiTasks; track task) {
+            <li>
+              <button
+                type="button"
+                class="uk-button uk-button-small uk-button-default"
+                (click)="addSuggestedTask(task)"
+                >
+                Add {{ task.Name }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    }
 
-      <ul class="uk-list uk-list-disc">
-        <li *ngFor="let task of aiTasks">
-          <button
-            type="button"
-            class="uk-button uk-button-small uk-button-default"
-            (click)="addSuggestedTask(task)"
-          >
-            Add {{ task.Name }}
-          </button>
-        </li>
-      </ul>
-    </div>
-
-    <div *ngIf="aiHabits.length > 0">
-      <h2>Suggested Habits</h2>
-
-      <ul class="uk-list uk-list-disc">
-        <li *ngFor="let habit of aiHabits">
-          <button
-            type="button"
-            class="uk-button uk-button-small uk-button-default"
-            (click)="addSuggestedHabit(habit)"
-          >
-            Add {{ habit.Name }}
-          </button>
-        </li>
-      </ul>
-    </div>
+    @if (aiHabits.length > 0) {
+      <div>
+        <h2>Suggested Habits</h2>
+        <ul class="uk-list uk-list-disc">
+          @for (habit of aiHabits; track habit) {
+            <li>
+              <button
+                type="button"
+                class="uk-button uk-button-small uk-button-default"
+                (click)="addSuggestedHabit(habit)"
+                >
+                Add {{ habit.Name }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 </form>

@@ -8,7 +8,7 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { Goal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { CalendarHeatmapComponent } from "../../../components/calendar-heatmap/calendar-heatmap.component";
-import { NgIf, NgFor, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
@@ -18,11 +18,9 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   imports: [
     RouterLink,
     FaIconComponent,
-    NgIf,
-    NgFor,
     CalendarHeatmapComponent,
-    DatePipe,
-  ],
+    DatePipe
+],
 })
 export class HabitShowPageComponent implements OnInit {
   public constructor(

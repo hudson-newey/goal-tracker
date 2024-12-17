@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
-import { NgFor, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 
@@ -11,7 +11,7 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
   templateUrl: "./list.component.html",
   styleUrl: "./list.component.less",
   standalone: true,
-  imports: [RouterLink, NgFor, DatePipe],
+  imports: [RouterLink, DatePipe],
 })
 export class LogbookListComponent implements OnInit {
   public constructor(

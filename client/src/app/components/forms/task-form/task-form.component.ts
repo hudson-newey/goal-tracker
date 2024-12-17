@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { TasksService } from "src/app/services/tasks/tasks.service";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Goal } from "src/app/models/goal";
-import { NgFor, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -14,7 +14,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./task-form.component.html",
   styleUrl: "./task-form.component.less",
   standalone: true,
-  imports: [FormsModule, NgFor, AsyncPipe],
+  imports: [FormsModule, AsyncPipe],
 })
 export class TaskFormComponent
   extends AbstractFormComponent<ITask>

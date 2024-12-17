@@ -3,13 +3,13 @@
 <button
   class="uk-button-secondary uk-button uk-margin-small-right uk-margin-small-top"
   [routerLink]="model?.EditUrl"
->
+  >
   Edit: {{ model?.Name }}
 </button>
 <button
   class="uk-button-danger uk-button uk-margin-small-top"
   [routerLink]="model?.DeleteUrl"
->
+  >
   Delete: {{ model?.Name }}
 </button>
 
@@ -22,27 +22,33 @@
   <fa-icon [icon]="model?.AntiHabit ? faCheck : faXmark"></fa-icon>
 </p>
 
-<p *ngIf="model?.IsQuantifiable">
-  Completed Value: {{ model?.TimesCompletedToday }} / {{ model?.TargetValue }}
-</p>
+@if (model?.IsQuantifiable) {
+  <p>
+    Completed Value: {{ model?.TimesCompletedToday }} / {{ model?.TargetValue }}
+  </p>
+}
 
-<p *ngIf="goalModel">
-  Associated Goal:
-  <a [routerLink]="goalModel.ViewUrl">
-    {{ goalModel.Name }}
-  </a>
-</p>
+@if (goalModel) {
+  <p>
+    Associated Goal:
+    <a [routerLink]="goalModel.ViewUrl">
+      {{ goalModel.Name }}
+    </a>
+  </p>
+}
 
 <h2>Completed Dates</h2>
 
 <ul>
-  <li *ngFor="let completedDate of recentCompletedDates">
-    {{ completedDate }}
-  </li>
+  @for (completedDate of recentCompletedDates; track completedDate) {
+    <li>
+      {{ completedDate }}
+    </li>
+  }
 </ul>
 
-<ng-container *ngIf="model">
+@if (model) {
   <app-calendar-heatmap
     [data]="model.FormattedCompletedDates"
   ></app-calendar-heatmap>
-</ng-container>
+}

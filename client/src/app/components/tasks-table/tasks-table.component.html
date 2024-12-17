@@ -10,53 +10,48 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let model of models">
-      <td>
-        <input
-          [(ngModel)]="model.Completed"
-          (change)="changeState.emit(model)"
-          type="checkbox"
-          class="uk-checkbox"
-        />
-      </td>
+    @for (model of models; track model) {
+      <tr>
+        <td>
+          <input
+            [(ngModel)]="model.Completed"
+            (change)="changeState.emit(model)"
+            type="checkbox"
+            class="uk-checkbox"
+            />
+        </td>
+        <td>
+          <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
+            {{ model.Name }}
+          </a>
+        </td>
+        <td class="hide-in-mobile">
+          @if (model.Description) {
+            <p class="description">
+              {{ model.Description }}
+            </p>
+          } @else {
+            <i>No description</i>
+          }
+        </td>
+        <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
+        <td [ngClass]="{ 'uk-text-danger': model.isOverdue }">
+          @if (model.CompleteBy) {
+            {{ model.CompleteBy }}
+          } @else {
+            <i>No date set</i>
+          }
+        </td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+            >View</a
+            >
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
 
-      <td>
-        <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
-          {{ model.Name }}
-        </a>
-      </td>
 
-      <td class="hide-in-mobile">
-        <ng-container *ngIf="model.Description; else defaultDescription">
-          <p class="description">
-            {{ model.Description }}
-          </p>
-        </ng-container>
-      </td>
-
-      <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
-
-      <td [ngClass]="{ 'uk-text-danger': model.isOverdue }">
-        <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
-          {{ model.CompleteBy }}
-        </ng-container>
-      </td>
-
-      <td>
-        <a
-          [routerLink]="model.ViewUrl"
-          class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-          >View</a
-        >
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<ng-template #defaultDescription>
-  <i>No description</i>
-</ng-template>
-
-<ng-template #defaultCompleteBy>
-  <i>No date set</i>
-</ng-template>

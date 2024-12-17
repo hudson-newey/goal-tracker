@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
-import { NgIf } from "@angular/common";
+
 import { HabitsTableComponent } from "../../../components/habits-table/habits-table.component";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
@@ -13,7 +13,7 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   templateUrl: "list.component.html",
   styleUrl: "list.component.less",
   standalone: true,
-  imports: [RouterLink, HabitsTableComponent, NgIf],
+  imports: [RouterLink, HabitsTableComponent],
 })
 export class HabitListComponent implements OnInit {
   public constructor(

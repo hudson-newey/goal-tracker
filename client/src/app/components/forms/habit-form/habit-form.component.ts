@@ -6,7 +6,7 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Goal } from "src/app/models/goal";
 import { BehaviorSubject, take } from "rxjs";
-import { NgFor, NgIf, AsyncPipe } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -14,7 +14,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./habit-form.component.html",
   styleUrl: "./habit-form.component.less",
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf, AsyncPipe],
+  imports: [FormsModule, AsyncPipe],
 })
 export class HabitFormComponent
   extends AbstractFormComponent<IHabit>
