@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { IHabit } from "src/app/models/habit";
@@ -15,10 +15,8 @@ import { HabitFormComponent } from "../../../components/forms/habit-form/habit-f
   imports: [HabitFormComponent],
 })
 export class HabitsUpdateComponent {
-  public constructor(
-    private api: HabitsService,
-    private route: ActivatedRoute,
-  ) {}
+  private api = inject(HabitsService);
+  private route = inject(ActivatedRoute);
 
   protected model: IHabit = {};
 

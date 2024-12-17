@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { ITask, Task } from "src/app/models/task";
 import { BehaviorSubject, take } from "rxjs";
@@ -19,13 +19,9 @@ export class TaskFormComponent
   extends AbstractFormComponent<ITask>
   implements OnInit
 {
-  public constructor(
-    private api: TasksService,
-    private goalApi: GoalsService,
-    private router: Router,
-  ) {
-    super();
-  }
+  private api = inject(TasksService);
+  private goalApi = inject(GoalsService);
+  private router = inject(Router);
 
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 

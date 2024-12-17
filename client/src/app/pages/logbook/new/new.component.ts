@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
@@ -11,10 +11,8 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
 })
 export class LogbookNewComponent {
-  public constructor(
-    private router: Router,
-    private api: LogbookService,
-  ) {}
+  private router = inject(Router);
+  private api = inject(LogbookService);
 
   protected model: ILogbook = {
     CreatedAt: new Date().toLocaleDateString("en-GB"),

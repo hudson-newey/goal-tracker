@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
@@ -12,11 +12,9 @@ import { Id } from "src/app/types/helpers";
   standalone: true,
 })
 export class LogbookDeleteComponent implements OnInit {
-  public constructor(
-    private api: LogbookService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  private api = inject(LogbookService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   protected model?: Logbook;
 

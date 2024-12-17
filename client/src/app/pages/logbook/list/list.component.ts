@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
@@ -12,10 +12,8 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
   imports: [RouterLink],
 })
 export class LogbookListComponent implements OnInit {
-  public constructor(
-    private api: LogbookService,
-    private virtualDb: VirtualDatabaseService,
-  ) {}
+  private api = inject(LogbookService);
+  private virtualDb = inject(VirtualDatabaseService);
 
   protected logbooks: Logbook[] = [];
 

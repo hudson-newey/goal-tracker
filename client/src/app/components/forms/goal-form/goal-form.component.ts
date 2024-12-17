@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Goal, IGoal } from "src/app/models/goal";
@@ -19,15 +19,11 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
   imports: [FormsModule],
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
-  public constructor(
-    private api: GoalsService,
-    private gptApi: GptService,
-    private habitsApi: HabitsService,
-    private tasksApi: TasksService,
-    private router: Router,
-  ) {
-    super();
-  }
+  private api = inject(GoalsService);
+  private gptApi = inject(GptService);
+  private habitsApi = inject(HabitsService);
+  private tasksApi = inject(TasksService);
+  private router = inject(Router);
 
   protected aiHabits: Habit[] = [];
   protected aiTasks: Task[] = [];

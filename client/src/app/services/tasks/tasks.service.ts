@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Observable } from "rxjs";
 import { createUrl, setLastUpdated } from "../helpers";
 import { HttpClient } from "@angular/common/http";
@@ -9,9 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable()
 export class TasksService extends AbstractService {
-  public constructor(public http: HttpClient) {
-    super();
-  }
+  http = inject(HttpClient);
 
   public getTodaysRemainingTasks(): Observable<ApiHttpResponse<ITask[]>> {
     throw new Error("Not implemented");

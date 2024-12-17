@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Goal, IGoal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
@@ -14,11 +14,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   imports: [RouterLink, FormsModule],
 })
 export class GoalsPageComponent implements OnInit {
-  public constructor(
-    private api: GoalsService,
-    private virtualDb: VirtualDatabaseService,
-    private vibration: VibrationService,
-  ) {}
+  private api = inject(GoalsService);
+  private virtualDb = inject(VirtualDatabaseService);
+  private vibration = inject(VibrationService);
 
   protected goals: Goal[] = [];
 

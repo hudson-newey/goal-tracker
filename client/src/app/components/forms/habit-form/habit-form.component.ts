@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { Habit, IHabit } from "src/app/models/habit";
 import { Router } from "@angular/router";
@@ -19,13 +19,9 @@ export class HabitFormComponent
   extends AbstractFormComponent<IHabit>
   implements OnInit
 {
-  public constructor(
-    private router: Router,
-    private api: HabitsService,
-    private goalApi: GoalsService,
-  ) {
-    super();
-  }
+  private router = inject(Router);
+  private api = inject(HabitsService);
+  private goalApi = inject(GoalsService);
 
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 

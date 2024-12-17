@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { IGoal } from "src/app/models/goal";
@@ -14,10 +14,8 @@ import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form
   imports: [GoalFormComponent],
 })
 export class GoalsUpdateComponent implements OnInit {
-  public constructor(
-    private api: GoalsService,
-    private route: ActivatedRoute,
-  ) {}
+  private api = inject(GoalsService);
+  private route = inject(ActivatedRoute);
 
   protected model: IGoal = {};
 

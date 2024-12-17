@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { ApiHttpResponse } from "src/app/types/services";
 import { HttpClient } from "@angular/common/http";
@@ -8,12 +8,8 @@ import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class PingService extends AbstractService {
-  public constructor(
-    public http: HttpClient,
-    private config: ClientConfigService,
-  ) {
-    super();
-  }
+  http = inject(HttpClient);
+  private config = inject(ClientConfigService);
 
   public pingRoute = "/ping";
 

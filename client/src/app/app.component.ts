@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { SyncQueueService } from "./services/syncQueue/sync-queue.service";
@@ -11,7 +11,9 @@ import { SyncQueueService } from "./services/syncQueue/sync-queue.service";
   imports: [NavbarComponent, RouterOutlet],
 })
 export class AppComponent {
-  public constructor(private syncQueueService: SyncQueueService) {
+  private syncQueueService = inject(SyncQueueService);
+
+  public constructor() {
     this.syncQueueService.attemptSync();
   }
 }

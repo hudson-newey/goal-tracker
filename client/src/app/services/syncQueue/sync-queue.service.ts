@@ -1,5 +1,5 @@
 import { HttpClient, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 import { PingService } from "../ping/ping.service";
@@ -10,12 +10,12 @@ import { ApiHttpResponse } from "src/app/types/services";
 
 @Injectable({ providedIn: "root" })
 export class SyncQueueService extends AbstractService {
-  constructor(
-    private http: HttpClient,
-    private pingService: PingService,
-    private config: ClientConfigService,
-    private virtualDatabase: VirtualDatabaseService,
-  ) {
+  private http = inject(HttpClient);
+  private pingService = inject(PingService);
+  private config = inject(ClientConfigService);
+  private virtualDatabase = inject(VirtualDatabaseService);
+
+  constructor() {
     super();
 
     // immediately update the connection status

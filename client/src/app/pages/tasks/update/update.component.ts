@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { ITask } from "src/app/models/task";
@@ -15,10 +15,8 @@ import { TaskFormComponent } from "../../../components/forms/task-form/task-form
   imports: [TaskFormComponent],
 })
 export class TasksUpdateComponent implements OnInit {
-  public constructor(
-    private api: TasksService,
-    private route: ActivatedRoute,
-  ) {}
+  private api = inject(TasksService);
+  private route = inject(ActivatedRoute);
 
   protected model: ITask = {};
 

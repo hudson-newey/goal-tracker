@@ -1,13 +1,11 @@
 import { HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class VirtualDatabaseService extends AbstractService {
-  public constructor(private config: ClientConfigService) {
-    super();
-  }
+  private config = inject(ClientConfigService);
 
   public knownVirtualTablesLocalStorageKey = "knownVirtualTables";
   public changeNotifier = new EventTarget();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
@@ -11,11 +11,9 @@ import { Id } from "src/app/types/helpers";
   standalone: true,
 })
 export class DeleteGoalPageComponent implements OnInit {
-  public constructor(
-    private api: GoalsService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  private api = inject(GoalsService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   protected model?: Goal;
 

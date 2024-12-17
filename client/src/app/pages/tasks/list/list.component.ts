@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Task, ITask } from "src/app/models/task";
 import { TasksService } from "src/app/services/tasks/tasks.service";
@@ -15,11 +15,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   imports: [RouterLink, TasksTableComponent],
 })
 export class TasksPageComponent implements OnInit {
-  public constructor(
-    private api: TasksService,
-    private virtualDb: VirtualDatabaseService,
-    private vibrate: VibrationService,
-  ) {}
+  private api = inject(TasksService);
+  private virtualDb = inject(VirtualDatabaseService);
+  private vibrate = inject(VibrationService);
 
   protected tasks: Task[] = [];
 

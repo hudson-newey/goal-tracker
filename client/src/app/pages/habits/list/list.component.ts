@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
@@ -15,11 +15,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   imports: [RouterLink, HabitsTableComponent],
 })
 export class HabitListComponent implements OnInit {
-  public constructor(
-    private api: HabitsService,
-    private virtualDb: VirtualDatabaseService,
-    private vibration: VibrationService,
-  ) {}
+  private api = inject(HabitsService);
+  private virtualDb = inject(VirtualDatabaseService);
+  private vibration = inject(VibrationService);
 
   protected habits: Habit[] = [];
 

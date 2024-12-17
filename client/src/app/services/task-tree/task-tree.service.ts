@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { Task } from "src/app/models/task";
 import { TasksService } from "../tasks/tasks.service";
@@ -6,9 +6,7 @@ import { Id } from "src/app/types/helpers";
 
 @Injectable({ providedIn: "root" })
 export class TaskTreeService extends AbstractService {
-  public constructor(private taskService: TasksService) {
-    super();
-  }
+  private taskService = inject(TasksService);
 
   // TODO: At the moment, we only support one dependency for each task
   // I have made it so that the models support having multiple dependencies

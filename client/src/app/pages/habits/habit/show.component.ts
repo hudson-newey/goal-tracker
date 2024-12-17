@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +16,9 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   imports: [RouterLink, FaIconComponent, CalendarHeatmapComponent],
 })
 export class HabitShowPageComponent implements OnInit {
-  public constructor(
-    private api: HabitsService,
-    private route: ActivatedRoute,
-    private goalApi: GoalsService,
-  ) {}
+  private api = inject(HabitsService);
+  private route = inject(ActivatedRoute);
+  private goalApi = inject(GoalsService);
 
   // font-awesome icons
   protected faCheck = faCheck;

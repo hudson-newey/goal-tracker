@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
@@ -13,10 +13,8 @@ import { Id } from "src/app/types/helpers";
   imports: [RouterLink],
 })
 export class GoalPageComponent implements OnInit {
-  public constructor(
-    private api: GoalsService,
-    private route: ActivatedRoute,
-  ) {}
+  private api = inject(GoalsService);
+  private route = inject(ActivatedRoute);
 
   protected model?: Goal;
   protected associatedTasks?: Task[];

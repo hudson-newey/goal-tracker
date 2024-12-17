@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
@@ -12,10 +12,8 @@ import { Id } from "src/app/types/helpers";
   imports: [RouterLink],
 })
 export class LogbookShowComponent {
-  public constructor(
-    private api: LogbookService,
-    private route: ActivatedRoute,
-  ) {}
+  private api = inject(LogbookService);
+  private route = inject(ActivatedRoute);
 
   protected model?: Logbook;
 

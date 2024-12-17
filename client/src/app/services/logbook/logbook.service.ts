@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -9,9 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable()
 export class LogbookService extends AbstractService {
-  constructor(private http: HttpClient) {
-    super();
-  }
+  private http = inject(HttpClient);
 
   // GET /logbooks
   public getLogbooks(): Observable<ApiHttpResponse<ILogbook[]>> {

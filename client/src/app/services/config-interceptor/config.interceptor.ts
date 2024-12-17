@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import {
   HttpEvent,
   HttpHandler,
@@ -14,12 +14,10 @@ import { PingService } from "../ping/ping.service";
 
 @Injectable()
 export class ConfigInterceptor implements HttpInterceptor {
-  public constructor(
-    private config: ClientConfigService,
-    private virtualDb: VirtualDatabaseService,
-    private syncService: SyncQueueService,
-    private pingService: PingService,
-  ) {}
+  private config = inject(ClientConfigService);
+  private virtualDb = inject(VirtualDatabaseService);
+  private syncService = inject(SyncQueueService);
+  private pingService = inject(PingService);
 
   public intercept(
     request: HttpRequest<unknown>,

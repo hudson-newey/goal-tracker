@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { createUrl, setLastUpdated } from "../helpers";
 import { HttpClient } from "@angular/common/http";
@@ -11,9 +11,7 @@ import { IHabit } from "src/app/models/habit";
 
 @Injectable()
 export class GoalsService extends AbstractService {
-  public constructor(private http: HttpClient) {
-    super();
-  }
+  private http = inject(HttpClient);
 
   // GET /goals
   public listGoals(): Observable<ApiHttpResponse<IGoal[]>> {

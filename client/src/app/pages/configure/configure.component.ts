@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ClientConfigService } from "src/app/services/clientConfig/client-config.service";
 import { FormsModule } from "@angular/forms";
 import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service";
@@ -10,10 +10,8 @@ import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service"
   imports: [FormsModule],
 })
 export class ConfigurePageComponent {
-  public constructor(
-    private configService: ClientConfigService,
-    private syncService: SyncQueueService,
-  ) {}
+  private configService = inject(ClientConfigService);
+  private syncService = inject(SyncQueueService);
 
   protected customServerUrl: string =
     this.configService.getCustomServerUrl() ?? "";

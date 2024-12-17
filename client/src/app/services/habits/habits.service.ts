@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AbstractService } from "../abstract-service.service";
@@ -9,9 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable()
 export class HabitsService extends AbstractService {
-  public constructor(public http: HttpClient) {
-    super();
-  }
+  http = inject(HttpClient);
 
   // GET /habits
   public getHabits(): Observable<ApiHttpResponse<IHabit[]>> {

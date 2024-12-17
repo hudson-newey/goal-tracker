@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
@@ -13,11 +13,9 @@ import { FormsModule } from "@angular/forms";
   imports: [FormsModule],
 })
 export class LogbookEditComponent {
-  public constructor(
-    private api: LogbookService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  private api = inject(LogbookService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   protected model: ILogbook = {};
 

@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { Observable } from "rxjs";
 import { ApiHttpResponse } from "src/app/types/services";
@@ -9,9 +9,7 @@ import { IGoal } from "src/app/models/goal";
 
 @Injectable()
 export class GptService extends AbstractService {
-  public constructor(public http: HttpClient) {
-    super();
-  }
+  http = inject(HttpClient);
 
   public getHabitsForGoal(
     goalModel: IGoal,

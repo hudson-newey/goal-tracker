@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Habit } from "src/app/models/habit";
@@ -11,11 +11,9 @@ import { Id } from "src/app/types/helpers";
   standalone: true,
 })
 export class DeleteHabitPageComponent implements OnInit {
-  public constructor(
-    private api: HabitsService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  private api = inject(HabitsService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   protected model?: Habit;
 
