@@ -16,7 +16,6 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
   selector: "app-goal-form",
   templateUrl: "./goal-form.component.html",
   styleUrl: "./goal-form.component.less",
-  standalone: true,
   imports: [FormsModule],
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {

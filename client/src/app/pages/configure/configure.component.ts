@@ -7,7 +7,6 @@ import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service"
   selector: "app-configure",
   templateUrl: "./configure.component.html",
   styleUrl: "./configure.component.less",
-  standalone: true,
   imports: [FormsModule],
 })
 export class ConfigurePageComponent {

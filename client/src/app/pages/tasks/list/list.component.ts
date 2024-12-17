@@ -12,7 +12,6 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   selector: "app-tasks-page",
   templateUrl: "list.component.html",
   styleUrl: "list.component.less",
-  standalone: true,
   imports: [RouterLink, TasksTableComponent],
 })
 export class TasksPageComponent implements OnInit {

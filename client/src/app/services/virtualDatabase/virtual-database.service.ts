@@ -15,8 +15,8 @@ export class VirtualDatabaseService extends AbstractService {
   // TODO: move this to the sync queue service
   // It's currently here because of recursive interceptors
   public pushToSyncQueue(request: HttpRequest<unknown>): void {
-    const syncQueue = JSON.parse(localStorage.getItem("syncQueue") as string) ??
-      [];
+    const syncQueue =
+      JSON.parse(localStorage.getItem("syncQueue") as string) ?? [];
 
     syncQueue.push(request);
 
@@ -164,9 +164,10 @@ export class VirtualDatabaseService extends AbstractService {
   }
 
   private addToKnownTables(tableName: string): void {
-    const knownTables = JSON.parse(
-      localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
-    ) ?? [];
+    const knownTables =
+      JSON.parse(
+        localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
+      ) ?? [];
 
     if (knownTables.includes(tableName)) {
       return;

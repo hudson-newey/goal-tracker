@@ -36,7 +36,7 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.AntiHabit"
-        />
+      />
       Anti Habit
     </label>
 
@@ -46,7 +46,7 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.IsQuantifiable"
-        />
+      />
       Quantifiable
     </label>
 
@@ -56,7 +56,7 @@
         class="uk-checkbox"
         type="checkbox"
         [(ngModel)]="model.IsTimeBased"
-        />
+      />
       Time-Based
     </label>
   </div>
@@ -71,7 +71,7 @@
           class="uk-input"
           placeholder="e.g. '5' (km run)"
           [(ngModel)]="model.TargetValue"
-          />
+        />
       </label>
     </div>
   }
@@ -86,7 +86,7 @@
           class="uk-input"
           placeholder="e.g. '60' (minutes of exercise)"
           [(ngModel)]="model.TargetTime"
-          />
+        />
       </label>
     </div>
   }
@@ -96,7 +96,7 @@
       type="submit"
       class="uk-button uk-button-primary uk-margin-top"
       (click)="submitForm()"
-      >
+    >
       {{ creating ? "Create" : "Update" }} Habit
     </button>
   </div>

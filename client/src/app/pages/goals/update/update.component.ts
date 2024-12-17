@@ -11,7 +11,6 @@ import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form
   template: `
     <app-goal-form [creating]="false" [model]="model"></app-goal-form>
   `,
-  standalone: true,
   imports: [GoalFormComponent],
 })
 export class GoalsUpdateComponent implements OnInit {

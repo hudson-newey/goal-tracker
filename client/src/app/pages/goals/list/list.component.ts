@@ -11,7 +11,6 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
 @Component({
   selector: "app-goals-page",
   templateUrl: "list.component.html",
-  standalone: true,
   imports: [RouterLink, FormsModule],
 })
 export class GoalsPageComponent implements OnInit {

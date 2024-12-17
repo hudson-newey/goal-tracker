@@ -6,13 +6,11 @@ import { Task } from "src/app/models/task";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-task-page",
   templateUrl: "show.component.html",
-  standalone: true,
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink],
 })
 export class TaskPageComponent implements OnInit {
   public constructor(

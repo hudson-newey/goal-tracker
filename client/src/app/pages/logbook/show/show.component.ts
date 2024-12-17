@@ -4,14 +4,12 @@ import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-show",
   templateUrl: "./show.component.html",
   styleUrl: "./show.component.less",
-  standalone: true,
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink],
 })
 export class LogbookShowComponent {
   public constructor(

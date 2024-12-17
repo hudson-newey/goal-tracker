@@ -13,7 +13,6 @@ import { FormsModule } from "@angular/forms";
   selector: "app-task-form",
   templateUrl: "./task-form.component.html",
   styleUrl: "./task-form.component.less",
-  standalone: true,
   imports: [FormsModule, AsyncPipe],
 })
 export class TaskFormComponent

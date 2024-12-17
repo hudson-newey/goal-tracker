@@ -13,7 +13,6 @@ import { FormsModule } from "@angular/forms";
   selector: "app-habit-form",
   templateUrl: "./habit-form.component.html",
   styleUrl: "./habit-form.component.less",
-  standalone: true,
   imports: [FormsModule, AsyncPipe],
 })
 export class HabitFormComponent

@@ -7,7 +7,6 @@ import { SyncQueueService } from "./services/syncQueue/sync-queue.service";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.less",
-  standalone: true,
   providers: [SyncQueueService],
   imports: [NavbarComponent, RouterOutlet],
 })

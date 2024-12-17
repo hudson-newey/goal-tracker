@@ -12,7 +12,6 @@ import { HabitFormComponent } from "../../../components/forms/habit-form/habit-f
     [creating]="false"
     [model]="model"
   ></app-habit-form>`,
-  standalone: true,
   imports: [HabitFormComponent],
 })
 export class HabitsUpdateComponent {

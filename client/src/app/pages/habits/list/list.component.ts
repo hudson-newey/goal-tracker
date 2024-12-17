@@ -12,7 +12,6 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   selector: "app-list-page",
   templateUrl: "list.component.html",
   styleUrl: "list.component.less",
-  standalone: true,
   imports: [RouterLink, HabitsTableComponent],
 })
 export class HabitListComponent implements OnInit {

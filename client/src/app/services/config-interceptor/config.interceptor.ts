@@ -41,7 +41,7 @@ export class ConfigInterceptor implements HttpInterceptor {
   private realDatabaseResponse(
     request: HttpRequest<unknown>,
     next: HttpHandler,
-    isPingRoute: boolean
+    isPingRoute: boolean,
   ): Observable<HttpEvent<unknown>> {
     return new Observable<HttpEvent<unknown>>((observer) => {
       // use the real apis database

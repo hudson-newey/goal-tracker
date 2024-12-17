@@ -4,7 +4,6 @@ import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form
 @Component({
   selector: "app-new-goal-page",
   template: `<app-goal-form [creating]="true"></app-goal-form>`,
-  standalone: true,
   imports: [GoalFormComponent],
 })
 export class NewGoalPageComponent {}

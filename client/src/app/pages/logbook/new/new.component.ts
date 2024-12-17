@@ -8,7 +8,6 @@ import { FormsModule } from "@angular/forms";
   selector: "app-new",
   templateUrl: "./new.component.html",
   styleUrl: "./new.component.less",
-  standalone: true,
   imports: [FormsModule],
 })
 export class LogbookNewComponent {

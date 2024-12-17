@@ -4,7 +4,6 @@ import { Seconds } from "src/app/types/units";
 
 @Component({
   selector: "app-timer",
-  standalone: true,
   imports: [],
   templateUrl: "./timer.component.html",
   styleUrl: "./timer.component.less",
@@ -31,8 +30,7 @@ export class TimerComponent {
   protected start(): void {
     this.timer = interval(1_000);
 
-    this.timer.subscribe(() => {
-    });
+    this.timer.subscribe(() => {});
   }
 
   protected pause(): void {

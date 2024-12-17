@@ -10,7 +10,6 @@ import { FormsModule } from "@angular/forms";
   selector: "app-edit",
   templateUrl: "./edit.component.html",
   styleUrl: "./edit.component.less",
-  standalone: true,
   imports: [FormsModule],
 })
 export class LogbookEditComponent {

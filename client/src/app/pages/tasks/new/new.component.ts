@@ -4,7 +4,6 @@ import { TaskFormComponent } from "../../../components/forms/task-form/task-form
 @Component({
   selector: "app-new-task-page",
   template: `<app-task-form [creating]="true"></app-task-form>`,
-  standalone: true,
   imports: [TaskFormComponent],
 })
 export class NewTaskPageComponent {}

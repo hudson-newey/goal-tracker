@@ -12,7 +12,6 @@ import { TaskFormComponent } from "../../../components/forms/task-form/task-form
     [creating]="false"
     [model]="model"
   ></app-task-form>`,
-  standalone: true,
   imports: [TaskFormComponent],
 })
 export class TasksUpdateComponent implements OnInit {

@@ -3,12 +3,10 @@ import { Habit } from "src/app/models/habit";
 import { RouterLink } from "@angular/router";
 import { NoContextMenuDirective } from "../../directives/no-context-menu.directive";
 
-
 @Component({
   selector: "app-habits-table",
   templateUrl: "./habits-table.component.html",
   styleUrl: "./habits-table.component.less",
-  standalone: true,
   imports: [NoContextMenuDirective, RouterLink],
 })
 export class HabitsTableComponent {

@@ -19,7 +19,7 @@
               (change)="changeState.emit(model)"
               type="checkbox"
               class="uk-checkbox"
-              />
+            />
           } @else {
             <!--
             This template is used when a habit can have a value attached
@@ -30,7 +30,7 @@
               (click)="changeState.emit(model)"
               (contextmenu)="decrementState.emit(model)"
               appNoContextMenu
-              >
+            >
               {{ model?.TimesCompletedToday ?? 0 }}
             </button>
           }
@@ -53,7 +53,7 @@
           <a
             [routerLink]="model.ViewUrl"
             class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-            >
+          >
             View
           </a>
         </td>
@@ -74,7 +74,7 @@
               (change)="changeState.emit(model)"
               type="checkbox"
               class="uk-checkbox"
-              />
+            />
           </td>
           <td>
             <a [routerLink]="model.ViewUrl" class="uk-link uk -text-secondary">
@@ -94,7 +94,7 @@
             <a
               [routerLink]="model.ViewUrl"
               class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-              >
+            >
               View
             </a>
           </td>
@@ -108,8 +108,7 @@
   <button
     class="uk-button uk-button-default"
     (click)="showAntiHabits = !showAntiHabits"
-    >
+  >
     <span> {{ showAntiHabits ? "Hide" : "Show" }} anti habits </span>
   </button>
 }
-
