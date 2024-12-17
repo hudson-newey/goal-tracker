@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Output, input } from "@angular/core";
 import { Habit } from "src/app/models/habit";
 import { RouterLink } from "@angular/router";
 import { NoContextMenuDirective } from "../../directives/no-context-menu.directive";
@@ -10,8 +10,7 @@ import { NoContextMenuDirective } from "../../directives/no-context-menu.directi
   imports: [NoContextMenuDirective, RouterLink],
 })
 export class HabitsTableComponent {
-  @Input({ required: true })
-  public models: Habit[] = [];
+  public readonly models = input.required<Habit[]>();
 
   @Output()
   public changeState = new EventEmitter<Habit>();
@@ -22,10 +21,10 @@ export class HabitsTableComponent {
   protected showAntiHabits = false;
 
   protected get positiveHabits(): Habit[] {
-    return this.models.filter((habit) => !habit.AntiHabit);
+    return this.models().filter((habit) => !habit.AntiHabit);
   }
 
   protected get antiHabits(): Habit[] {
-    return this.models.filter((habit) => habit.AntiHabit);
+    return this.models().filter((habit) => habit.AntiHabit);
   }
 }

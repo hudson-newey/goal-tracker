@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { AfterViewInit, Component, Input } from "@angular/core";
+import { AfterViewInit, Component, input } from "@angular/core";
 import schema from "./calendar-heatmap.schema.json";
 import embed from "vega-embed";
 
@@ -17,14 +17,13 @@ interface CalendarData {
 export class CalendarHeatmapComponent implements AfterViewInit {
   public constructor() {}
 
-  @Input()
-  public data: string[] = [];
+  public readonly data = input<string[]>([]);
 
   private spec: any = schema;
   private chart: any;
 
   public async ngAfterViewInit() {
-    this.spec = this.addDataToSpec(this.data, this.spec);
+    this.spec = this.addDataToSpec(this.data(), this.spec);
 
     this.chart = await embed("#calendar-element", this.spec);
   }
