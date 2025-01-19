@@ -1,5 +1,13 @@
 # Goal Tracker
 
+[Deprecated]
+
+I now use this repo to try out new Go + Angular technologies & versions.
+
+Development is now mainly concerned with the tech stack, rather than creating a useful product. 
+
+---
+
 A goal tracking app that I created because I didn't like the existing applications
 
 A live deployment (without device syncing) can be found at [grathium-industries.github.io/posts/deployments/habit-tracker](https://grathium-industries.github.io/posts/deployments/habit-tracker)
