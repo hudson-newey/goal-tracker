@@ -1,13 +1,13 @@
-@if (creating) {
+@if (creating()) {
   <h1>Create Goal</h1>
 } @else {
-  <h1>Edit Goal: {{ model.Name }}</h1>
+  <h1>Edit Goal: {{ model().Name }}</h1>
 }
 
 <form>
   <label class="uk-form-label">
     Goal Name
-    <input name="name" class="uk-input" type="text" [(ngModel)]="model.Name" />
+    <input name="name" class="uk-input" type="text" [(ngModel)]="model().Name" />
   </label>
 
   <label class="uk-form-label">
@@ -16,7 +16,7 @@
       name="description"
       class="uk-textarea"
       rows="10"
-      [(ngModel)]="model.Description"
+      [(ngModel)]="model().Description"
     ></textarea>
   </label>
 
@@ -30,7 +30,7 @@
     class="uk-button uk-button-primary uk-margin-top"
     (click)="submitForm()"
   >
-    {{ creating ? "Create" : "Update" }} Goal
+    {{ creating() ? "Create" : "Update" }} Goal
   </button>
 
   <hr />
