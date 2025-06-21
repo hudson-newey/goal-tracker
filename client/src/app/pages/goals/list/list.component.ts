@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from "@angular/core";
 import { take } from "rxjs";
 import { Goal, IGoal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";

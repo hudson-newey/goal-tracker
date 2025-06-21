@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";

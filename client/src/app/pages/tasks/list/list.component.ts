@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from "@angular/core";
 import { take } from "rxjs";
 import { Task, ITask } from "src/app/models/task";
 import { TasksService } from "src/app/services/tasks/tasks.service";
