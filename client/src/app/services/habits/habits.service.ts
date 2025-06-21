@@ -7,7 +7,7 @@ import { IHabit, Habit } from "../../models/habit";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class HabitsService extends AbstractService {
   http = inject(HttpClient);
 

@@ -9,7 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 import { ITask } from "src/app/models/task";
 import { IHabit } from "src/app/models/habit";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class GoalsService extends AbstractService {
   private http = inject(HttpClient);
 

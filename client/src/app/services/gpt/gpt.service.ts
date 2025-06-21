@@ -7,7 +7,7 @@ import { createUrl } from "../helpers";
 import { IHabit } from "src/app/models/habit";
 import { IGoal } from "src/app/models/goal";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class GptService extends AbstractService {
   http = inject(HttpClient);
 

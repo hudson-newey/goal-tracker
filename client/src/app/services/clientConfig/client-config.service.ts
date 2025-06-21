@@ -7,10 +7,6 @@ export const customServerStorageKey = "customServerUrl" as const;
 
 @Injectable({ providedIn: "root" })
 export class ClientConfigService extends AbstractService {
-  public constructor() {
-    super();
-  }
-
   public getCustomServerUrl(): string | null {
     return localStorage.getItem(customServerStorageKey);
   }

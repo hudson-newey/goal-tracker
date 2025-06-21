@@ -7,7 +7,7 @@ import { ILogbook, Logbook } from "../../models/logbook";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class LogbookService extends AbstractService {
   private http = inject(HttpClient);
 

@@ -7,7 +7,7 @@ import { ITask, Task } from "../../models/task";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class TasksService extends AbstractService {
   http = inject(HttpClient);
 
