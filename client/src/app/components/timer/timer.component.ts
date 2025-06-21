@@ -1,12 +1,12 @@
-import { Component, Input, input, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, input, output } from "@angular/core";
 import { interval, Observable, of } from "rxjs";
 import { Seconds } from "src/app/types/units";
 
 @Component({
   selector: "app-timer",
-  imports: [],
   templateUrl: "./timer.component.html",
   styleUrl: "./timer.component.less",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimerComponent {
   /**
@@ -17,8 +17,7 @@ export class TimerComponent {
 
   public readonly targetTime = input(0);
 
-  @Input()
-  public value: Seconds = 0;
+  public value = input<Seconds>(0);
 
   public readonly valueChange = output<Seconds>();
 

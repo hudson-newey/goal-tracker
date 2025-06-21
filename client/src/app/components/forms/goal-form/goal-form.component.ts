@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Goal, IGoal } from "src/app/models/goal";
@@ -17,6 +17,7 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
   templateUrl: "./goal-form.component.html",
   styleUrl: "./goal-form.component.less",
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   private api = inject(GoalsService);
@@ -29,9 +30,9 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   protected aiTasks: Task[] = [];
 
   public submitForm(): void {
-    const goalModel: Goal = new Goal(this.model);
+    const goalModel = new Goal(this.model());
 
-    if (this.creating) {
+    if (this.creating()) {
       this.api
         .createGoal(goalModel)
         .pipe(take(1))
@@ -49,25 +50,25 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   }
 
   protected updateCompleteBy(event: any): void {
-    const value: Date = new Date(event.target.value);
-    this.model.CompleteBy = value.toLocaleDateString("en-GB");
+    const value = new Date(event.target.value);
+    this.model().CompleteBy = value.toLocaleDateString("en-GB");
   }
 
   protected getAiTasksAndHabits(): void {
-    if (!this.model.Name) {
+    if (!this.model().Name) {
       console.error("Goal name is required to generate AI tasks and habits.");
       return;
     }
 
     this.gptApi
-      .getHabitsForGoal(this.model)
+      .getHabitsForGoal(this.model())
       .pipe(take(1))
       .subscribe((response) => {
         this.aiHabits = response.data.map((model: IHabit) => new Habit(model));
       });
 
     this.gptApi
-      .getTasksForGoal(this.model)
+      .getTasksForGoal(this.model())
       .pipe(take(1))
       .subscribe((response) => {
         this.aiTasks = response.data.map((model: ITask) => new Task(model));
@@ -76,8 +77,8 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   // used when the user adds a suggested habits from the ai suggested habits
   protected addSuggestedHabit(habitModel: Habit): void {
-    if (this.model?.ClientId || this.model?.ClientId === "0") {
-      habitModel.Goal = this.model.ClientId;
+    if (this.model()?.ClientId || this.model()?.ClientId === "0") {
+      habitModel.Goal = this.model().ClientId as any;
     }
 
     this.habitsApi
@@ -92,8 +93,8 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   // used when the user adds a suggested tasks from the ai suggested tasks
   protected addSuggestedTask(taskModel: Task): void {
-    if (this.model?.ClientId || this.model?.ClientId === "0") {
-      taskModel.Goal = this.model.ClientId;
+    if (this.model()?.ClientId || this.model()?.ClientId === "0") {
+      taskModel.Goal = this.model().ClientId as any;
     }
 
     this.tasksApi

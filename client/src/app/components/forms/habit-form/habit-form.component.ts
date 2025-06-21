@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { Habit, IHabit } from "src/app/models/habit";
 import { Router } from "@angular/router";
@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./habit-form.component.html",
   styleUrl: "./habit-form.component.less",
   imports: [FormsModule, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitFormComponent
   extends AbstractFormComponent<IHabit>
@@ -35,9 +36,9 @@ export class HabitFormComponent
   }
 
   protected submitForm(): void {
-    const habitModel: Habit = new Habit(this.model);
+    const habitModel = new Habit(this.model());
 
-    if (this.creating) {
+    if (this.creating()) {
       this.api
         .createHabit(habitModel)
         .pipe(take(1))

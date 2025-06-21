@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { ITask, Task } from "src/app/models/task";
 import { BehaviorSubject, take } from "rxjs";
@@ -14,6 +14,7 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./task-form.component.html",
   styleUrl: "./task-form.component.less",
   imports: [FormsModule, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFormComponent
   extends AbstractFormComponent<ITask>
@@ -35,9 +36,9 @@ export class TaskFormComponent
   }
 
   protected submitForm(): void {
-    const taskModel: Task = new Task(this.model);
+    const taskModel = new Task(this.model());
 
-    if (this.creating) {
+    if (this.creating()) {
       this.api
         .createTask(taskModel)
         .pipe(take(1))
@@ -52,11 +53,11 @@ export class TaskFormComponent
 
   protected updateImportance(event: any): void {
     const value: string = event.target.value;
-    this.model.Importance = parseInt(value, 10);
+    this.model().Importance = parseInt(value, 10);
   }
 
   protected updateCompleteBy(event: any): void {
     const value: Date = new Date(event.target.value);
-    this.model.CompleteBy = value.toLocaleDateString("en-GB");
+    this.model().CompleteBy = value.toLocaleDateString("en-GB");
   }
 }

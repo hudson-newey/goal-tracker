@@ -1,4 +1,4 @@
-import { Component, input, output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input, output } from "@angular/core";
 import { Habit } from "src/app/models/habit";
 import { RouterLink } from "@angular/router";
 import { NoContextMenuDirective } from "../../directives/no-context-menu.directive";
@@ -8,6 +8,7 @@ import { NoContextMenuDirective } from "../../directives/no-context-menu.directi
   templateUrl: "./habits-table.component.html",
   styleUrl: "./habits-table.component.less",
   imports: [NoContextMenuDirective, RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitsTableComponent {
   public readonly models = input.required<Habit[]>();

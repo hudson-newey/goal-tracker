@@ -1,20 +1,7 @@
-import { Directive, Input } from "@angular/core";
+import { Directive, input } from "@angular/core";
 
-export interface IAbstractFormComponent<T> {
-  creating: boolean;
-  model?: T;
-}
-
-@Directive({
-  selector: "app-abstract-form",
-  standalone: true,
-})
-export abstract class AbstractFormComponent<T extends object>
-  implements IAbstractFormComponent<T>
-{
-  @Input({ required: true })
-  public creating!: boolean;
-
-  @Input({ required: false })
-  public model: T = {} as T;
+@Directive({ selector: "app-abstract-form" })
+export abstract class AbstractFormComponent<T extends object> {
+  public creating = input.required<boolean>();
+  public model = input<T>({} as T);
 }
