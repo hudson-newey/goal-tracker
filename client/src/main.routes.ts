@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 
-export const mainRoutes: Routes = [
+export const clientRoutes: Routes = [
   // prettier wants to expand each route object property onto its own line
   // however, I think that having each route on its own line is more readable
   // even if it does exceed the 80 and 120 character limit

@@ -53,9 +53,6 @@ importers:
       vega-embed:
         specifier: ^6.28.0
         version: 6.28.0(vega-lite@5.19.0(vega@5.30.0(encoding@0.1.13)))(vega@5.30.0(encoding@0.1.13))
-      zone.js:
-        specifier: ~0.15.0
-        version: 0.15.0
     devDependencies:
       '@angular/build':
         specifier: ^20.0.1
@@ -6516,4 +6513,5 @@ snapshots:
 
   yoctocolors-cjs@2.1.2: {}
 
-  zone.js@0.15.0: {}
+  zone.js@0.15.0:
+    optional: true
