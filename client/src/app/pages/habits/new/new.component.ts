@@ -1,14 +1,11 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { IHabit } from "src/app/models/habit";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-  selector: "app-new-page",
-  template: `<app-habit-form
-    [creating]="true"
-    [model]="partialModel"
-  ></app-habit-form>`,
+  templateUrl: "./new.component.html",
   imports: [HabitFormComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewHabitPage {
   public constructor() {}

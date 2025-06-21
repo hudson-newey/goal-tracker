@@ -1,13 +1,13 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ClientConfigService } from "src/app/services/clientConfig/client-config.service";
 import { FormsModule } from "@angular/forms";
 import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service";
 
 @Component({
-  selector: "app-configure",
   templateUrl: "./configure.component.html",
   styleUrl: "./configure.component.less",
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigurePageComponent {
   private configService = inject(ClientConfigService);

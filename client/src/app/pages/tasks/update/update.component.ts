@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { ITask } from "src/app/models/task";
@@ -7,12 +7,9 @@ import { Id } from "src/app/types/helpers";
 import { TaskFormComponent } from "../../../components/forms/task-form/task-form.component";
 
 @Component({
-  selector: "app-update-task",
-  template: `<app-task-form
-    [creating]="false"
-    [model]="model"
-  ></app-task-form>`,
+  templateUrl: "./update.component.html",
   imports: [TaskFormComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksUpdateComponent implements OnInit {
   private api = inject(TasksService);

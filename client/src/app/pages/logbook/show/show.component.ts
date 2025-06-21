@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
@@ -6,10 +6,10 @@ import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-show",
   templateUrl: "./show.component.html",
   styleUrl: "./show.component.less",
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookShowComponent {
   private api = inject(LogbookService);

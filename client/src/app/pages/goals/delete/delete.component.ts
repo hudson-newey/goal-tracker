@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
@@ -6,9 +6,8 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-page",
-  templateUrl: "delete.component.html",
-  standalone: true,
+  templateUrl: "./delete.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteGoalPageComponent implements OnInit {
   private api = inject(GoalsService);

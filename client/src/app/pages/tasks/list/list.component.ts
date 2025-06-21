@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Task, ITask } from "src/app/models/task";
 import { TasksService } from "src/app/services/tasks/tasks.service";
@@ -9,10 +9,10 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
-  selector: "app-tasks-page",
-  templateUrl: "list.component.html",
-  styleUrl: "list.component.less",
+  templateUrl: "./list.component.html",
+  styleUrl: "./list.component.less",
   imports: [RouterLink, TasksTableComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksPageComponent implements OnInit {
   private api = inject(TasksService);

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
@@ -9,10 +9,10 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
-  selector: "app-list-page",
-  templateUrl: "list.component.html",
-  styleUrl: "list.component.less",
+  templateUrl: "./list.component.html",
+  styleUrl: "./list.component.less",
   imports: [RouterLink, HabitsTableComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitListComponent implements OnInit {
   private api = inject(HabitsService);

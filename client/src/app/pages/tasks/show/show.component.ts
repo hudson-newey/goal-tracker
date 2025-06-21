@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
@@ -8,9 +8,9 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-task-page",
-  templateUrl: "show.component.html",
+  templateUrl: "./show.component.html",
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskPageComponent implements OnInit {
   private api = inject(TasksService);

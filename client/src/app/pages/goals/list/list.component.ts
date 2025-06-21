@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Goal, IGoal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
@@ -9,9 +9,9 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
-  selector: "app-goals-page",
-  templateUrl: "list.component.html",
+  templateUrl: "./list.component.html",
   imports: [RouterLink, FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsPageComponent implements OnInit {
   private api = inject(GoalsService);

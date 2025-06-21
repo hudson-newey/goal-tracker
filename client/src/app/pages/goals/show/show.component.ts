@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
@@ -8,9 +8,9 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-goal-page",
-  templateUrl: "show.component.html",
+  templateUrl: "./show.component.html",
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalPageComponent implements OnInit {
   private api = inject(GoalsService);

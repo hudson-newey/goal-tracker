@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -11,9 +11,9 @@ import { CalendarHeatmapComponent } from "../../../components/calendar-heatmap/c
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: "app-habit-page",
-  templateUrl: "show.component.html",
+  templateUrl: "./show.component.html",
   imports: [RouterLink, FaIconComponent, CalendarHeatmapComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitShowPageComponent implements OnInit {
   private api = inject(HabitsService);

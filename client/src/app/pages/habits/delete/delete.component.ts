@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Habit } from "src/app/models/habit";
@@ -6,9 +6,8 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-habit-page",
-  templateUrl: "delete.component.html",
-  standalone: true,
+  templateUrl: "./delete.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteHabitPageComponent implements OnInit {
   private api = inject(HabitsService);

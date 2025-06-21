@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
@@ -7,10 +7,10 @@ import { Id } from "src/app/types/helpers";
 import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-edit",
   templateUrl: "./edit.component.html",
   styleUrl: "./edit.component.less",
   imports: [FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookEditComponent {
   private api = inject(LogbookService);

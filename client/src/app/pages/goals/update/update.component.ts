@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { IGoal } from "src/app/models/goal";
@@ -7,11 +7,9 @@ import { Id } from "src/app/types/helpers";
 import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form.component";
 
 @Component({
-  selector: "app-update-goal",
-  template: `
-    <app-goal-form [creating]="false" [model]="model"></app-goal-form>
-  `,
+  templateUrl: "./update.component.html",
   imports: [GoalFormComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsUpdateComponent implements OnInit {
   private api = inject(GoalsService);

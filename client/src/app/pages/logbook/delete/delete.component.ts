@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
@@ -6,10 +6,9 @@ import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete",
   templateUrl: "./delete.component.html",
   styleUrl: "./delete.component.less",
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookDeleteComponent implements OnInit {
   private api = inject(LogbookService);

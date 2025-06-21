@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
@@ -6,10 +6,10 @@ import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 
 @Component({
-  selector: "app-list",
   templateUrl: "./list.component.html",
   styleUrl: "./list.component.less",
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookListComponent implements OnInit {
   private api = inject(LogbookService);

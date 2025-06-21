@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Task } from "src/app/models/task";
@@ -6,9 +6,8 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-task-page",
-  templateUrl: "delete.component.html",
-  standalone: true,
+  templateUrl: "./delete.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteTaskPageComponent implements OnInit {
   private api = inject(TasksService);

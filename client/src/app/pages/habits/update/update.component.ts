@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { IHabit } from "src/app/models/habit";
@@ -7,12 +7,9 @@ import { Id } from "src/app/types/helpers";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-  selector: "app-update-habit",
-  template: `<app-habit-form
-    [creating]="false"
-    [model]="model"
-  ></app-habit-form>`,
+  templateUrl: "./update.component.html",
   imports: [HabitFormComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitsUpdateComponent {
   private api = inject(HabitsService);

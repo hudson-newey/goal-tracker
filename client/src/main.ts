@@ -15,8 +15,6 @@ import { mainRoutes as clientRoutes } from "./main.routes";
 
 bootstrapApplication(AppComponent, {
   providers: [
-    FontAwesomeModule,
-    FormsModule,
     { provide: HTTP_INTERCEPTORS, useClass: ConfigInterceptor, multi: true },
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(clientRoutes),
