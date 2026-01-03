@@ -10,10 +10,10 @@ import { ApiHttpResponse } from "src/app/types/services";
 
 @Injectable({ providedIn: "root" })
 export class SyncQueueService extends AbstractService {
-  private http = inject(HttpClient);
-  private pingService = inject(PingService);
-  private config = inject(ClientConfigService);
-  private virtualDatabase = inject(VirtualDatabaseService);
+  private readonly http = inject(HttpClient);
+  private readonly pingService = inject(PingService);
+  private readonly config = inject(ClientConfigService);
+  private readonly virtualDatabase = inject(VirtualDatabaseService);
 
   constructor() {
     super();

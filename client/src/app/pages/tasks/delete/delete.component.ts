@@ -15,9 +15,9 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteTaskPageComponent implements OnInit {
-  private api = inject(TasksService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly api = inject(TasksService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   protected model?: Task;
 

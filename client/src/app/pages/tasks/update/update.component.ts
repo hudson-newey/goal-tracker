@@ -17,8 +17,8 @@ import { TaskFormComponent } from "../../../components/forms/task-form/task-form
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksUpdateComponent implements OnInit {
-  private api = inject(TasksService);
-  private route = inject(ActivatedRoute);
+  private readonly api = inject(TasksService);
+  private readonly route = inject(ActivatedRoute);
 
   protected model: ITask = {};
 

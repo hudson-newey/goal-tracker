@@ -13,9 +13,9 @@ import { FormsModule } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookEditComponent {
-  private api = inject(LogbookService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly api = inject(LogbookService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   protected model: ILogbook = {};
 

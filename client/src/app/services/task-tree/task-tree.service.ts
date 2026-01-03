@@ -6,7 +6,7 @@ import { Id } from "src/app/types/helpers";
 
 @Injectable({ providedIn: "root" })
 export class TaskTreeService extends AbstractService {
-  private taskService = inject(TasksService);
+  private readonly taskService = inject(TasksService);
 
   // TODO: At the moment, we only support one dependency for each task
   // I have made it so that the models support having multiple dependencies

@@ -14,10 +14,10 @@ import { PingService } from "../ping/ping.service";
 
 @Injectable()
 export class ConfigInterceptor implements HttpInterceptor {
-  private config = inject(ClientConfigService);
-  private virtualDb = inject(VirtualDatabaseService);
-  private syncService = inject(SyncQueueService);
-  private pingService = inject(PingService);
+  private readonly config = inject(ClientConfigService);
+  private readonly virtualDb = inject(VirtualDatabaseService);
+  private readonly syncService = inject(SyncQueueService);
+  private readonly pingService = inject(PingService);
 
   public intercept(
     request: HttpRequest<unknown>,

@@ -15,9 +15,9 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteHabitPageComponent implements OnInit {
-  private api = inject(HabitsService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly api = inject(HabitsService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   protected model?: Habit;
 

@@ -20,11 +20,11 @@ export class HabitFormComponent
   extends AbstractFormComponent<IHabit>
   implements OnInit
 {
-  private router = inject(Router);
-  private api = inject(HabitsService);
-  private goalApi = inject(GoalsService);
+  private readonly router = inject(Router);
+  private readonly api = inject(HabitsService);
+  private readonly goalApi = inject(GoalsService);
 
-  protected goals$ = new BehaviorSubject<Goal[]>([]);
+  protected readonly goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {
     this.goalApi

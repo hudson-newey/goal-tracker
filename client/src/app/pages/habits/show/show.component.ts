@@ -21,13 +21,13 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitShowPageComponent implements OnInit {
-  private api = inject(HabitsService);
-  private route = inject(ActivatedRoute);
-  private goalApi = inject(GoalsService);
+  private readonly api = inject(HabitsService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly goalApi = inject(GoalsService);
 
   // font-awesome icons
-  protected faCheck = faCheck;
-  protected faXmark = faXmark;
+  protected readonly faCheck = faCheck;
+  protected readonly faXmark = faXmark;
 
   protected model?: Habit;
   protected goalModel?: Goal;

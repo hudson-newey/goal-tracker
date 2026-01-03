@@ -12,8 +12,8 @@ import { HabitFormComponent } from "../../../components/forms/habit-form/habit-f
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitsUpdateComponent {
-  private api = inject(HabitsService);
-  private route = inject(ActivatedRoute);
+  private readonly api = inject(HabitsService);
+  private readonly route = inject(ActivatedRoute);
 
   protected model: IHabit = {};
 

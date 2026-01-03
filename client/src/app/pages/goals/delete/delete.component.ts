@@ -15,9 +15,9 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteGoalPageComponent implements OnInit {
-  private api = inject(GoalsService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly api = inject(GoalsService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   protected model?: Goal;
 

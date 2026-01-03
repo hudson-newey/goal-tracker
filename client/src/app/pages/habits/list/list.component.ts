@@ -20,9 +20,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitListComponent implements OnInit {
-  private api = inject(HabitsService);
-  private virtualDb = inject(VirtualDatabaseService);
-  private vibration = inject(VibrationService);
+  private readonly api = inject(HabitsService);
+  private readonly virtualDb = inject(VirtualDatabaseService);
+  private readonly vibration = inject(VibrationService);
 
   protected habits: Habit[] = [];
 

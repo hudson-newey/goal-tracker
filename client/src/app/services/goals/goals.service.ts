@@ -11,7 +11,7 @@ import { IHabit } from "src/app/models/habit";
 
 @Injectable({ providedIn: "root" })
 export class GoalsService extends AbstractService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   // GET /goals
   public listGoals(): Observable<ApiHttpResponse<IGoal[]>> {

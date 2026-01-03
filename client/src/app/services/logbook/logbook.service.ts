@@ -9,7 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable({ providedIn: "root" })
 export class LogbookService extends AbstractService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   // GET /logbooks
   public getLogbooks(): Observable<ApiHttpResponse<ILogbook[]>> {

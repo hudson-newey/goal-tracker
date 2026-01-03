@@ -9,7 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable({ providedIn: "root" })
 export class HabitsService extends AbstractService {
-  http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   // GET /habits
   public getHabits(): Observable<ApiHttpResponse<IHabit[]>> {

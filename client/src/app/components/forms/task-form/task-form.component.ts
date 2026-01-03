@@ -20,11 +20,11 @@ export class TaskFormComponent
   extends AbstractFormComponent<ITask>
   implements OnInit
 {
-  private api = inject(TasksService);
-  private goalApi = inject(GoalsService);
-  private router = inject(Router);
+  private readonly api = inject(TasksService);
+  private readonly goalApi = inject(GoalsService);
+  private readonly router = inject(Router);
 
-  protected goals$ = new BehaviorSubject<Goal[]>([]);
+  protected readonly goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {
     this.goalApi

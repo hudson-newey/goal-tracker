@@ -11,8 +11,8 @@ import { FormsModule } from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookNewComponent {
-  private router = inject(Router);
-  private api = inject(LogbookService);
+  private readonly router = inject(Router);
+  private readonly api = inject(LogbookService);
 
   protected model: ILogbook = {
     CreatedAt: new Date().toLocaleDateString("en-GB"),

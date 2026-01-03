@@ -17,8 +17,8 @@ import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsUpdateComponent implements OnInit {
-  private api = inject(GoalsService);
-  private route = inject(ActivatedRoute);
+  private readonly api = inject(GoalsService);
+  private readonly route = inject(ActivatedRoute);
 
   protected model: IGoal = {};
 

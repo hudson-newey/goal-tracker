@@ -16,9 +16,9 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookDeleteComponent implements OnInit {
-  private api = inject(LogbookService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly api = inject(LogbookService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   protected model?: Logbook;
 

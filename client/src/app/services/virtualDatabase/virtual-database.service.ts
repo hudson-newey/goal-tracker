@@ -5,7 +5,7 @@ import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class VirtualDatabaseService extends AbstractService {
-  private config = inject(ClientConfigService);
+  private readonly config = inject(ClientConfigService);
 
   public knownVirtualTablesLocalStorageKey = "knownVirtualTables";
   public changeNotifier = new EventTarget();

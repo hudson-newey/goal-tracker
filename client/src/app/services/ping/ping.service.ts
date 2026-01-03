@@ -8,10 +8,10 @@ import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class PingService extends AbstractService {
-  http = inject(HttpClient);
-  private config = inject(ClientConfigService);
+  private readonly http = inject(HttpClient);
+  private readonly config = inject(ClientConfigService);
 
-  public pingRoute = "/ping";
+  public readonly pingRoute = "/ping";
 
   public pingServer(): Observable<ApiHttpResponse<string>> {
     let endpoint = createUrl("/ping");

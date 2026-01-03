@@ -10,8 +10,8 @@ import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service"
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigurePageComponent {
-  private configService = inject(ClientConfigService);
-  private syncService = inject(SyncQueueService);
+  private readonly configService = inject(ClientConfigService);
+  private readonly syncService = inject(SyncQueueService);
 
   protected customServerUrl: string =
     this.configService.getCustomServerUrl() ?? "";

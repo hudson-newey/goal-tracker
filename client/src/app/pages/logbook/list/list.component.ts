@@ -17,8 +17,8 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookListComponent implements OnInit {
-  private api = inject(LogbookService);
-  private virtualDb = inject(VirtualDatabaseService);
+  private readonly api = inject(LogbookService);
+  private readonly virtualDb = inject(VirtualDatabaseService);
 
   protected logbooks: Logbook[] = [];
 

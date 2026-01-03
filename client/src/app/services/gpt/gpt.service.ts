@@ -9,7 +9,7 @@ import { IGoal } from "src/app/models/goal";
 
 @Injectable({ providedIn: "root" })
 export class GptService extends AbstractService {
-  http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   public getHabitsForGoal(
     goalModel: IGoal,

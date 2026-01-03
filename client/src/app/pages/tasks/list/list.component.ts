@@ -20,9 +20,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksPageComponent implements OnInit {
-  private api = inject(TasksService);
-  private virtualDb = inject(VirtualDatabaseService);
-  private vibrate = inject(VibrationService);
+  private readonly api = inject(TasksService);
+  private readonly virtualDb = inject(VirtualDatabaseService);
+  private readonly vibrate = inject(VibrationService);
 
   protected tasks: Task[] = [];
 

@@ -18,9 +18,9 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskPageComponent implements OnInit {
-  private api = inject(TasksService);
-  private route = inject(ActivatedRoute);
-  private goalApi = inject(GoalsService);
+  private readonly api = inject(TasksService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly goalApi = inject(GoalsService);
 
   protected model?: Task;
   protected goalModel?: Goal;

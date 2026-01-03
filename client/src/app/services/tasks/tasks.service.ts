@@ -9,7 +9,7 @@ import { ApiHttpResponse, EmptyResponse } from "../../types/services";
 
 @Injectable({ providedIn: "root" })
 export class TasksService extends AbstractService {
-  http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
   public getTodaysRemainingTasks(): Observable<ApiHttpResponse<ITask[]>> {
     throw new Error("Not implemented");

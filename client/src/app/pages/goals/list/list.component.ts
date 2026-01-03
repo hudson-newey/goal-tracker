@@ -19,9 +19,9 @@ import { VibrationService } from "src/app/services/vibration/vibration.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsPageComponent implements OnInit {
-  private api = inject(GoalsService);
-  private virtualDb = inject(VirtualDatabaseService);
-  private vibration = inject(VibrationService);
+  private readonly api = inject(GoalsService);
+  private readonly virtualDb = inject(VirtualDatabaseService);
+  private readonly vibration = inject(VibrationService);
 
   protected goals: Goal[] = [];
 

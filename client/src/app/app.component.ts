@@ -11,7 +11,7 @@ import { SyncQueueService } from "./services/syncQueue/sync-queue.service";
   imports: [NavbarComponent, RouterOutlet],
 })
 export class AppComponent {
-  private syncQueueService = inject(SyncQueueService);
+  private readonly syncQueueService = inject(SyncQueueService);
 
   public constructor() {
     this.syncQueueService.attemptSync();

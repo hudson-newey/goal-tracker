@@ -20,11 +20,11 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
-  private api = inject(GoalsService);
-  private gptApi = inject(GptService);
-  private habitsApi = inject(HabitsService);
-  private tasksApi = inject(TasksService);
-  private router = inject(Router);
+  private readonly api = inject(GoalsService);
+  private readonly gptApi = inject(GptService);
+  private readonly habitsApi = inject(HabitsService);
+  private readonly tasksApi = inject(TasksService);
+  private readonly router = inject(Router);
 
   protected aiHabits: Habit[] = [];
   protected aiTasks: Task[] = [];

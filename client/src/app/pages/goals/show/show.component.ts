@@ -18,8 +18,8 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalPageComponent implements OnInit {
-  private api = inject(GoalsService);
-  private route = inject(ActivatedRoute);
+  private readonly api = inject(GoalsService);
+  private readonly route = inject(ActivatedRoute);
 
   protected model?: Goal;
   protected associatedTasks?: Task[];

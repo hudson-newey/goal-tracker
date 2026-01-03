@@ -12,8 +12,8 @@ import { Id } from "src/app/types/helpers";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookShowComponent {
-  private api = inject(LogbookService);
-  private route = inject(ActivatedRoute);
+  private readonly api = inject(LogbookService);
+  private readonly route = inject(ActivatedRoute);
 
   protected model?: Logbook;
 
