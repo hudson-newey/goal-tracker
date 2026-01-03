@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (model of positiveHabits; track model) {
+    @for (model of positiveHabits(); track model.Id) {
       <tr>
         <td>
           @if (!model.IsQuantifiable || model.IsCompletedToday) {
@@ -60,13 +60,13 @@
       </tr>
     }
 
-    @if (showAntiHabits) {
+    @if (showAntiHabits()) {
       <tr>
         <td colspan="4">
           <h3>Anti habits</h3>
         </td>
       </tr>
-      @for (model of antiHabits; track model) {
+      @for (model of antiHabits(); track model.Id) {
         <tr>
           <td>
             <input
@@ -104,11 +104,11 @@
   </tbody>
 </table>
 
-@if (antiHabits.length > 0) {
+@if (antiHabits().length > 0) {
   <button
     class="uk-button uk-button-default"
-    (click)="showAntiHabits = !showAntiHabits"
+    (click)="toggleAntiHabits()"
   >
-    <span> {{ showAntiHabits ? "Hide" : "Show" }} anti habits </span>
+    <span> {{ showAntiHabits() ? "Hide" : "Show" }} anti habits </span>
   </button>
 }
