@@ -22,6 +22,7 @@
     "@angular/service-worker": "^21.0.6",
     "@fortawesome/angular-fontawesome": "4.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@two-web/kit": "0.0.1-rc.4",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1",
     "uikit": "^3.25.4",
