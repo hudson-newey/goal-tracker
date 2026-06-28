@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { Component } from "@angular/core";
 import { IHabit } from "../../../models/habit";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
   templateUrl: "./new.component.html",
   imports: [HabitFormComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewHabitPage {
   public constructor() {}

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { GoalsService } from "../../../services/goals/goals.service";
 import { Goal, IGoal } from "../../../models/goal";
@@ -17,7 +17,6 @@ import { TasksService } from "../../../services/tasks/tasks.service";
   templateUrl: "./goal-form.component.html",
   styleUrl: "./goal-form.component.less",
   imports: [FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   private readonly api = inject(GoalsService);

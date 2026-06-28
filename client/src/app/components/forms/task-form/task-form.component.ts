@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
 import { ITask, Task } from "../../../models/task";
 import { BehaviorSubject, take } from "rxjs";
@@ -14,7 +14,6 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./task-form.component.html",
   styleUrl: "./task-form.component.less",
   imports: [FormsModule, AsyncPipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFormComponent
   extends AbstractFormComponent<ITask>

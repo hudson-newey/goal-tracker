@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -15,7 +14,6 @@ import { Id } from "../../../types/helpers";
 @Component({
   templateUrl: "./show.component.html",
   imports: [RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalPageComponent implements OnInit {
   private readonly api = inject(GoalsService);

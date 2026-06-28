@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   input,
@@ -15,7 +14,6 @@ import { NoContextMenuDirective } from "../../directives/no-context-menu.directi
   templateUrl: "./habits-table.component.html",
   styleUrl: "./habits-table.component.less",
   imports: [NoContextMenuDirective, RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitsTableComponent {
   public readonly models = input.required<Habit[]>();

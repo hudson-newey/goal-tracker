@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { ILogbook, Logbook } from "../../../models/logbook";
 import { LogbookService } from "../../../services/logbook/logbook.service";
@@ -8,7 +8,6 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./new.component.html",
   styleUrl: "./new.component.less",
   imports: [FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookNewComponent {
   private readonly router = inject(Router);

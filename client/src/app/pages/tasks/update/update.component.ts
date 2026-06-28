@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -14,7 +13,6 @@ import { TaskFormComponent } from "../../../components/forms/task-form/task-form
 @Component({
   templateUrl: "./update.component.html",
   imports: [TaskFormComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksUpdateComponent implements OnInit {
   private readonly api = inject(TasksService);

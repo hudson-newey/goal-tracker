@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -14,7 +13,6 @@ import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form
 @Component({
   templateUrl: "./update.component.html",
   imports: [GoalFormComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsUpdateComponent implements OnInit {
   private readonly api = inject(GoalsService);

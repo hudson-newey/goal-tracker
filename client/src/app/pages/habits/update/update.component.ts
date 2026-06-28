@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { IHabit } from "../../../models/habit";
@@ -9,7 +9,6 @@ import { HabitFormComponent } from "../../../components/forms/habit-form/habit-f
 @Component({
   templateUrl: "./update.component.html",
   imports: [HabitFormComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitsUpdateComponent {
   private readonly api = inject(HabitsService);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   input,
   output,
@@ -14,7 +13,6 @@ import { NgClass } from "@angular/common";
   templateUrl: "./tasks-table.component.html",
   styleUrl: "./tasks-table.component.less",
   imports: [NgClass, FormsModule, RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksTableComponent {
   public constructor() {}

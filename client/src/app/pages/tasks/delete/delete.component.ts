@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -12,7 +11,6 @@ import { Id } from "../../../types/helpers";
 
 @Component({
   templateUrl: "./delete.component.html",
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteTaskPageComponent implements OnInit {
   private readonly api = inject(TasksService);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -16,7 +15,6 @@ import { VibrationService } from "../../../services/vibration/vibration.service"
   templateUrl: "./list.component.html",
   styleUrl: "./list.component.less",
   imports: [RouterLink, HabitsTableComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitListComponent implements OnInit {
   private readonly api = inject(HabitsService);

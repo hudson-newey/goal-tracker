@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -14,7 +13,6 @@ import { VirtualDatabaseService } from "../../../services/virtualDatabase/virtua
   templateUrl: "./list.component.html",
   styleUrl: "./list.component.less",
   imports: [RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookListComponent implements OnInit {
   private readonly api = inject(LogbookService);

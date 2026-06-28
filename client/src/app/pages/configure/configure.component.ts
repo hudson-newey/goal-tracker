@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ClientConfigService } from "../../services/clientConfig/client-config.service";
 import { FormsModule } from "@angular/forms";
 import { SyncQueueService } from "../../services/syncQueue/sync-queue.service";
@@ -7,7 +7,6 @@ import { SyncQueueService } from "../../services/syncQueue/sync-queue.service";
   templateUrl: "./configure.component.html",
   styleUrl: "./configure.component.less",
   imports: [FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigurePageComponent {
   private readonly configService = inject(ClientConfigService);

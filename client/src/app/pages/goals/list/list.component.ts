@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -16,7 +15,6 @@ import { VibrationService } from "../../../services/vibration/vibration.service"
 @Component({
   templateUrl: "./list.component.html",
   imports: [RouterLink, FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GoalsPageComponent implements OnInit {
   private readonly api = inject(GoalsService);

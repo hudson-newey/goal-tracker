@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -18,7 +17,6 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 @Component({
   templateUrl: "./show.component.html",
   imports: [RouterLink, FaIconComponent, CalendarHeatmapComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HabitShowPageComponent implements OnInit {
   private readonly api = inject(HabitsService);

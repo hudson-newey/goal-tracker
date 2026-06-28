@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { AfterViewInit, ChangeDetectionStrategy, Component, input } from "@angular/core";
+import { AfterViewInit, Component, input } from "@angular/core";
 import schema from "./calendar-heatmap.schema.json";
 import embed from "vega-embed";
 
@@ -12,7 +12,6 @@ interface CalendarData {
   selector: "app-calendar-heatmap",
   template: ` <div id="calendar-element"></div> `,
   styleUrl: "calendar-heatmap.component.less",
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarHeatmapComponent implements AfterViewInit {
   public constructor() {}

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   inject,
@@ -13,7 +12,6 @@ import { Id } from "../../../types/helpers";
 @Component({
   templateUrl: "./delete.component.html",
   styleUrl: "./delete.component.less",
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogbookDeleteComponent implements OnInit {
   private readonly api = inject(LogbookService);
