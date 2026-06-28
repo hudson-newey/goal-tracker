@@ -6,9 +6,9 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
-import { Habit } from "src/app/models/habit";
-import { HabitsService } from "src/app/services/habits/habits.service";
-import { Id } from "src/app/types/helpers";
+import { Habit } from "../../../models/habit";
+import { HabitsService } from "../../../services/habits/habits.service";
+import { Id } from "../../../types/helpers";
 
 @Component({
   templateUrl: "./delete.component.html",

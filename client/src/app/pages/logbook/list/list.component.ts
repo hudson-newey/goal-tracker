@@ -5,10 +5,10 @@ import {
   inject,
 } from "@angular/core";
 import { take } from "rxjs";
-import { ILogbook, Logbook } from "src/app/models/logbook";
-import { LogbookService } from "src/app/services/logbook/logbook.service";
+import { ILogbook, Logbook } from "../../../models/logbook";
+import { LogbookService } from "../../../services/logbook/logbook.service";
 import { RouterLink } from "@angular/router";
-import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
+import { VirtualDatabaseService } from "../../../services/virtualDatabase/virtual-database.service";
 
 @Component({
   templateUrl: "./list.component.html",

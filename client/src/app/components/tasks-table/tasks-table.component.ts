@@ -4,7 +4,7 @@ import {
   input,
   output,
 } from "@angular/core";
-import { Task } from "src/app/models/task";
+import { Task } from "../../models/task";
 import { RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { NgClass } from "@angular/common";

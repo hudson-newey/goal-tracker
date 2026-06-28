@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
-import { environment } from "src/environment";
-import { SyncQueueService } from "../syncQueue/sync-queue.service";
+import { environment } from "../../../environment";
 
 export const customServerStorageKey = "customServerUrl" as const;
 

@@ -6,9 +6,9 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
-import { Task } from "src/app/models/task";
-import { TasksService } from "src/app/services/tasks/tasks.service";
-import { Id } from "src/app/types/helpers";
+import { Task } from "../../../models/task";
+import { TasksService } from "../../../services/tasks/tasks.service";
+import { Id } from "../../../types/helpers";
 
 @Component({
   templateUrl: "./delete.component.html",

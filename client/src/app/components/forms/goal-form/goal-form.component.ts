@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
-import { GoalsService } from "src/app/services/goals/goals.service";
-import { Goal, IGoal } from "src/app/models/goal";
+import { GoalsService } from "../../../services/goals/goals.service";
+import { Goal, IGoal } from "../../../models/goal";
 import { take } from "rxjs";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { ITask, Task } from "src/app/models/task";
-import { Habit, IHabit } from "src/app/models/habit";
-import { GptService } from "src/app/services/gpt/gpt.service";
+import { ITask, Task } from "../../../models/task";
+import { Habit, IHabit } from "../../../models/habit";
+import { GptService } from "../../../services/gpt/gpt.service";
 
-import { HabitsService } from "src/app/services/habits/habits.service";
-import { TasksService } from "src/app/services/tasks/tasks.service";
+import { HabitsService } from "../../../services/habits/habits.service";
+import { TasksService } from "../../../services/tasks/tasks.service";
 
 @Component({
   selector: "app-goal-form",

@@ -7,11 +7,11 @@ import {
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Habit } from "src/app/models/habit";
-import { Id } from "src/app/types/helpers";
-import { HabitsService } from "src/app/services/habits/habits.service";
-import { Goal } from "src/app/models/goal";
-import { GoalsService } from "src/app/services/goals/goals.service";
+import { Habit } from "../../../models/habit";
+import { Id } from "../../../types/helpers";
+import { HabitsService } from "../../../services/habits/habits.service";
+import { Goal } from "../../../models/goal";
+import { GoalsService } from "../../../services/goals/goals.service";
 import { CalendarHeatmapComponent } from "../../../components/calendar-heatmap/calendar-heatmap.component";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 

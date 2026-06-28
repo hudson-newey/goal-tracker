@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
-import { ILogbook, Logbook } from "src/app/models/logbook";
-import { LogbookService } from "src/app/services/logbook/logbook.service";
-import { Id } from "src/app/types/helpers";
+import { ILogbook, Logbook } from "../../../models/logbook";
+import { LogbookService } from "../../../services/logbook/logbook.service";
+import { Id } from "../../../types/helpers";
 import { FormsModule } from "@angular/forms";
 
 @Component({

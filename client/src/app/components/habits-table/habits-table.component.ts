@@ -6,7 +6,7 @@ import {
   output,
   signal,
 } from "@angular/core";
-import { Habit } from "src/app/models/habit";
+import { Habit } from "../../models/habit";
 import { RouterLink } from "@angular/router";
 import { NoContextMenuDirective } from "../../directives/no-context-menu.directive";
 

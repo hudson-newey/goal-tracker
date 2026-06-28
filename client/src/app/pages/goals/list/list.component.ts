@@ -5,13 +5,13 @@ import {
   inject,
 } from "@angular/core";
 import { take } from "rxjs";
-import { Goal, IGoal } from "src/app/models/goal";
-import { GoalsService } from "src/app/services/goals/goals.service";
+import { Goal, IGoal } from "../../../models/goal";
+import { GoalsService } from "../../../services/goals/goals.service";
 import { FormsModule } from "@angular/forms";
 
 import { RouterLink } from "@angular/router";
-import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
-import { VibrationService } from "src/app/services/vibration/vibration.service";
+import { VirtualDatabaseService } from "../../../services/virtualDatabase/virtual-database.service";
+import { VibrationService } from "../../../services/vibration/vibration.service";
 
 @Component({
   templateUrl: "./list.component.html",

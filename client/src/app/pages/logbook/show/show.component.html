@@ -2,12 +2,15 @@
 
 <button
   class="uk-button uk-button-secondary uk-margin-small-right"
-  [routerLink]="model?.EditUrl"
+  [routerLink]="$safeNavigationMigration(model?.EditUrl)"
 >
   Edit: {{ model?.Name }}
 </button>
 
-<button class="uk-button uk-button-danger" [routerLink]="model?.DeleteUrl">
+<button
+  class="uk-button uk-button-danger"
+  [routerLink]="$safeNavigationMigration(model?.DeleteUrl)"
+>
   Delete: {{ model?.Name }}
 </button>
 

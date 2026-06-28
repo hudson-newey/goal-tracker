@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { IHabit } from "src/app/models/habit";
+import { IHabit } from "../../../models/habit";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({

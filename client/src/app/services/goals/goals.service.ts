@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
 import { IGoal, Goal } from "../../models/goal";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
-import { ITask } from "src/app/models/task";
-import { IHabit } from "src/app/models/habit";
+import { ITask } from "../../models/task";
+import { IHabit } from "../../models/habit";
 
 @Injectable({ providedIn: "root" })
 export class GoalsService extends AbstractService {

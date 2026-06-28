@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
-import { ClientConfigService } from "src/app/services/clientConfig/client-config.service";
+import { ClientConfigService } from "../../services/clientConfig/client-config.service";
 import { FormsModule } from "@angular/forms";
-import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service";
+import { SyncQueueService } from "../../services/syncQueue/sync-queue.service";
 
 @Component({
   templateUrl: "./configure.component.html",

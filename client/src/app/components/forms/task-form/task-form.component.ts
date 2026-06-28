@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
-import { ITask, Task } from "src/app/models/task";
+import { ITask, Task } from "../../../models/task";
 import { BehaviorSubject, take } from "rxjs";
 import { Router } from "@angular/router";
-import { TasksService } from "src/app/services/tasks/tasks.service";
-import { GoalsService } from "src/app/services/goals/goals.service";
-import { Goal } from "src/app/models/goal";
+import { TasksService } from "../../../services/tasks/tasks.service";
+import { GoalsService } from "../../../services/goals/goals.service";
+import { Goal } from "../../../models/goal";
 import { AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 

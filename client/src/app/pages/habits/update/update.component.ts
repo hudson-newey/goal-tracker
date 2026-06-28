@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
-import { IHabit } from "src/app/models/habit";
-import { HabitsService } from "src/app/services/habits/habits.service";
-import { Id } from "src/app/types/helpers";
+import { IHabit } from "../../../models/habit";
+import { HabitsService } from "../../../services/habits/habits.service";
+import { Id } from "../../../types/helpers";
 import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({

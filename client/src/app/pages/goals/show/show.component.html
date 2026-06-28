@@ -2,13 +2,13 @@
 
 <button
   class="uk-button-secondary uk-button uk-margin-small-right uk-margin-small-top"
-  [routerLink]="model?.EditUrl"
+  [routerLink]="$safeNavigationMigration(model?.EditUrl)"
 >
   Edit: {{ model?.Name }}
 </button>
 <button
   class="uk-button-danger uk-button uk-margin-small-top"
-  [routerLink]="model?.DeleteUrl"
+  [routerLink]="$safeNavigationMigration(model?.DeleteUrl)"
 >
   Delete: {{ model?.Name }}
 </button>

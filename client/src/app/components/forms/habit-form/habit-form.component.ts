@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 import { AbstractFormComponent } from "../abstract-form.component";
-import { Habit, IHabit } from "src/app/models/habit";
+import { Habit, IHabit } from "../../../models/habit";
 import { Router } from "@angular/router";
-import { HabitsService } from "src/app/services/habits/habits.service";
-import { GoalsService } from "src/app/services/goals/goals.service";
-import { Goal } from "src/app/models/goal";
+import { HabitsService } from "../../../services/habits/habits.service";
+import { GoalsService } from "../../../services/goals/goals.service";
+import { Goal } from "../../../models/goal";
 import { BehaviorSubject, take } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";

@@ -6,11 +6,11 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
-import { Goal } from "src/app/models/goal";
-import { Habit } from "src/app/models/habit";
-import { Task } from "src/app/models/task";
-import { GoalsService } from "src/app/services/goals/goals.service";
-import { Id } from "src/app/types/helpers";
+import { Goal } from "../../../models/goal";
+import { Habit } from "../../../models/habit";
+import { Task } from "../../../models/task";
+import { GoalsService } from "../../../services/goals/goals.service";
+import { Id } from "../../../types/helpers";
 
 @Component({
   templateUrl: "./show.component.html",

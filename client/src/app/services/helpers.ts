@@ -1,4 +1,4 @@
-import { environment } from "src/environment";
+import { environment } from "../../environment";
 import { AbstractModel } from "../models/abstractModel";
 
 export function createUrl(path: string): string {

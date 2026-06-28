@@ -6,9 +6,9 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
-import { IGoal } from "src/app/models/goal";
-import { GoalsService } from "src/app/services/goals/goals.service";
-import { Id } from "src/app/types/helpers";
+import { IGoal } from "../../../models/goal";
+import { GoalsService } from "../../../services/goals/goals.service";
+import { Id } from "../../../types/helpers";
 import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form.component";
 
 @Component({

@@ -5,13 +5,12 @@ import {
   inject,
 } from "@angular/core";
 import { take } from "rxjs";
-import { Task, ITask } from "src/app/models/task";
-import { TasksService } from "src/app/services/tasks/tasks.service";
-
+import { Task, ITask } from "../../../models/task";
+import { TasksService } from "../../../services/tasks/tasks.service";
 import { TasksTableComponent } from "../../../components/tasks-table/tasks-table.component";
 import { RouterLink } from "@angular/router";
-import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
-import { VibrationService } from "src/app/services/vibration/vibration.service";
+import { VirtualDatabaseService } from "../../../services/virtualDatabase/virtual-database.service";
+import { VibrationService } from "../../../services/vibration/vibration.service";
 
 @Component({
   templateUrl: "./list.component.html",

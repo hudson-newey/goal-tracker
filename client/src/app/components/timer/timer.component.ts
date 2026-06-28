@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, input, output } from "@angular/core";
 import { interval, Observable, of } from "rxjs";
-import { Seconds } from "src/app/types/units";
+import { Seconds } from "../../../types/units";
 
 @Component({
   selector: "app-timer",

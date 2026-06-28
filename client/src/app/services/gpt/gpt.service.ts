@@ -2,10 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
 import { Observable } from "rxjs";
-import { ApiHttpResponse } from "src/app/types/services";
+import { ApiHttpResponse } from "../../types/services";
 import { createUrl } from "../helpers";
-import { IHabit } from "src/app/models/habit";
-import { IGoal } from "src/app/models/goal";
+import { IHabit } from "../../models/habit";
+import { IGoal } from "../../models/goal";
 
 @Injectable({ providedIn: "root" })
 export class GptService extends AbstractService {

@@ -6,7 +6,7 @@ import { PingService } from "../ping/ping.service";
 import { Observable, first, interval } from "rxjs";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 import { createUrl } from "../helpers";
-import { ApiHttpResponse } from "src/app/types/services";
+import { ApiHttpResponse } from "../../types/services";
 
 @Injectable({ providedIn: "root" })
 export class SyncQueueService extends AbstractService {

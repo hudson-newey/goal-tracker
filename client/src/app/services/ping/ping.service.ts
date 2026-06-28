@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
-import { ApiHttpResponse } from "src/app/types/services";
+import { ApiHttpResponse } from "../../types/services";
 import { HttpClient } from "@angular/common/http";
 import { Observable, catchError, map, of } from "rxjs";
 import { createUrl } from "../helpers";

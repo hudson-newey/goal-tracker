@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
-import { Task } from "src/app/models/task";
+import { Task } from "../../../models/task";
 import { TasksService } from "../tasks/tasks.service";
-import { Id } from "src/app/types/helpers";
+import { Id } from "../../../types/helpers";
 
 @Injectable({ providedIn: "root" })
 export class TaskTreeService extends AbstractService {
