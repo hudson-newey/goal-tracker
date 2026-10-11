@@ -16,4 +16,16 @@ type Habit struct {
 	Value          int      // the the habit is quantifiable, it'll show the current value
 	DependsOn      []string // as _id
 	LastUpdated    string
+	// sync tombstone: deleted records stay in the database so other clients
+	// converge on the deletion, but they are filtered from all reads
+	Deleted   bool   `bson:",omitempty"`
+	DeletedAt string `bson:",omitempty"`
+}
+
+func (habit Habit) GetClientId() string {
+	return habit.ClientId
+}
+
+func (habit Habit) GetLastUpdated() string {
+	return habit.LastUpdated
 }

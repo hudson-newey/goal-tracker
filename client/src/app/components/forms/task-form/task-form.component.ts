@@ -8,6 +8,7 @@ import { GoalsService } from "../../../services/goals/goals.service";
 import { Goal } from "../../../models/goal";
 import { AsyncPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { toIsoDate } from "../../../utils/dates";
 
 @Component({
   selector: "app-task-form",
@@ -57,6 +58,6 @@ export class TaskFormComponent
 
   protected updateCompleteBy(event: any): void {
     const value: Date = new Date(event.target.value);
-    this.model().CompleteBy = value.toLocaleDateString("en-GB");
+    this.model().CompleteBy = toIsoDate(value);
   }
 }

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ILogbook, Logbook } from "../../../models/logbook";
 import { LogbookService } from "../../../services/logbook/logbook.service";
 import { FormsModule } from "@angular/forms";
+import { todayIso } from "../../../utils/dates";
 
 @Component({
   templateUrl: "./new.component.html",
@@ -14,7 +15,7 @@ export class LogbookNewComponent {
   private readonly api = inject(LogbookService);
 
   protected model: ILogbook = {
-    CreatedAt: new Date().toLocaleDateString("en-GB"),
+    CreatedAt: todayIso(),
   };
 
   protected submitForm(): void {

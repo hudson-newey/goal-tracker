@@ -39,12 +39,11 @@ export class LogbookListComponent implements OnInit {
       });
   }
 
-  // sorts logbooks in decending order (so that the most recentl created)
-  // logbook is at the top of the list
+  // sorts logbooks in descending order (so that the most recently created
+  // logbook is at the top of the list)
   private logbookSorter(a: Logbook, b: Logbook): number {
-    // TODO: this should use the CreatedAt property
-    const aCreated = parseInt(a.Id ?? a.ClientId);
-    const bCreated = parseInt(b.Id ?? b.ClientId);
+    const aCreated = new Date(a.CreatedAt ?? 0).getTime();
+    const bCreated = new Date(b.CreatedAt ?? 0).getTime();
 
     if (aCreated > bCreated) {
       return -1;
@@ -52,8 +51,6 @@ export class LogbookListComponent implements OnInit {
       return 1;
     }
 
-    // through domain exhaustion, we know that both values must be equal
-    // if (aCreated === bCreated)
     return 0;
   }
 }

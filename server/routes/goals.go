@@ -2,9 +2,8 @@ package routes
 
 import (
 	"log"
-	"reflect"
+	"strings"
 
-	"server/databaseService"
 	"server/helpers"
 	"server/models"
 
@@ -14,89 +13,42 @@ import (
 )
 
 // POST /goals
+//
+// Creating is an upsert keyed by the record's client id: clients replay
+// their offline operations on reconnect, so the same create can arrive more
+// than once. Conflicts are resolved with last-write-wins (LastUpdated).
 func CreateGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		var requestBody models.Goal
 
-		err := context.BindJSON(&requestBody)
-
-		if err != nil {
+		if err := context.BindJSON(&requestBody); err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
 		}
 
-		// if there is no clientId, this means that the goal was created when connected to the API
-		// and is not a part of a sync request
-		// if there is a clientId, the goal was created offline and is being updated as part of a sync request
-		// therefore, we should maintain the clientId to prevent sync conflicts
-		if requestBody.ClientId == "" || reflect.TypeOf(requestBody.ClientId).Kind() != reflect.String {
-			clientId := helpers.NextClientId(database, "goals")
-			requestBody.ClientId = clientId
-		}
-
-		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "goals", requestBody)
-
+		goal, err := helpers.UpsertSynced(database, "goals", requestBody)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		var responseBody models.Goal
-		id := result.InsertedID.(primitive.ObjectID).Hex()
-
-		responseBody = requestBody
-		responseBody.Id = id
-
-		helpers.Success(context, responseBody)
+		helpers.Success(context, goal)
 	}
 }
 
 // GET /goals
 func ListGoals(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var responseBody []models.Goal
-
-		// Retrieve all documents from the goals collection
-		cursor, err := database.Client.Database("habits").Collection("goals").Find(database.Ctx, bson.D{})
+		goals, err := helpers.ListSynced[models.Goal](database, "goals")
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
-		defer cursor.Close(database.Ctx)
 
-		// Iterate through the cursor and append each document to the response body
-		for cursor.Next(database.Ctx) {
-			var goal models.Goal
-
-			err := cursor.Decode(&goal)
-
-			goal.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
-
-			if err != nil {
-				log.Println(err)
-				helpers.InternalServerError(context)
-				return
-			}
-
-			responseBody = append(responseBody, goal)
-		}
-
-		// Check if there was an error during iteration
-		if err := cursor.Err(); err != nil {
-			log.Println(err)
-			helpers.InternalServerError(context)
-			return
-		}
-
-		if responseBody == nil {
-			responseBody = []models.Goal{}
-		}
-
-		// Return the response body as a JSON response
-		helpers.Success(context, responseBody)
+		helpers.Success(context, goals)
 	}
 }
 
@@ -105,47 +57,23 @@ func SearchGoals(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		searchTerm := context.Query("name")
 
-		var responseBody []models.Goal
-
-		// retrieve all documents from the goals collection where the name contains the search term
-		cursor, err := database.Client.Database("habits").Collection("goals").Find(database.Ctx, bson.M{"name": bson.M{"$regex": searchTerm}})
+		goals, err := helpers.ListSynced[models.Goal](database, "goals")
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		defer cursor.Close(database.Ctx)
+		// filter in memory; the collection is small and this matches the
+		// client side (offline) search implementation
+		responseBody := []models.Goal{}
 
-		// Iterate through the cursor and append each document to the response body
-		for cursor.Next(database.Ctx) {
-			var goal models.Goal
-
-			err := cursor.Decode(&goal)
-
-			goal.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
-
-			if err != nil {
-				log.Println(err)
-				helpers.InternalServerError(context)
-				return
+		for _, goal := range goals {
+			if strings.Contains(goal.Name, searchTerm) {
+				responseBody = append(responseBody, goal)
 			}
-
-			responseBody = append(responseBody, goal)
 		}
 
-		// Check if there was an error during iteration
-		if err := cursor.Err(); err != nil {
-			log.Println(err)
-			helpers.InternalServerError(context)
-			return
-		}
-
-		if responseBody == nil {
-			responseBody = []models.Goal{}
-		}
-
-		// Return the response body as a JSON response
 		helpers.Success(context, responseBody)
 	}
 }
@@ -153,15 +81,16 @@ func SearchGoals(database models.Database) func(context *gin.Context) {
 // GET /goals/:id
 func GetGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Find the document with the given _id
-		filter := bson.M{"clientid": id}
-		var goal models.Goal
-		err := database.Client.Database("habits").Collection("goals").FindOne(database.Ctx, filter).Decode(&goal)
+		goal, found, err := helpers.FetchSynced[models.Goal](database, "goals", id)
 		if err != nil {
 			log.Println(err)
+			helpers.InternalServerError(context)
+			return
+		}
+
+		if !found {
 			helpers.NotFoundError(context)
 			return
 		}
@@ -171,23 +100,30 @@ func GetGoal(database models.Database) func(context *gin.Context) {
 }
 
 // PUT /goals/:id
+//
+// Updates follow the same last-write-wins rules as creates; an update for a
+// client id that does not exist yet creates the goal (offline clients may
+// replay an update before its create reached the server).
 func UpdateGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		// Get the id parameter from the URL
-		id := context.Param("id")
+		var requestBody models.Goal
 
-		// Get the goal model from the request body
-		var goal models.Goal
-		if err := context.ShouldBindJSON(&goal); err != nil {
+		if err := context.ShouldBindJSON(&requestBody); err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
 		}
 
-		// Update the document with the given _id
-		filter := bson.M{"clientid": id}
-		update := bson.M{"$set": goal}
-		_, err := database.Client.Database("habits").Collection("goals").UpdateOne(database.Ctx, filter, update)
+		// trust the client id in the path so replays are deterministic
+		if pathId := context.Param("id"); pathId != "" {
+			requestBody.ClientId = pathId
+		}
+
+		goal, err := helpers.UpsertSynced(database, "goals", requestBody)
+		if err == helpers.ErrSupersededDelete {
+			helpers.NotFoundError(context)
+			return
+		}
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -199,41 +135,48 @@ func UpdateGoal(database models.Database) func(context *gin.Context) {
 }
 
 // DELETE /goals/:id
+//
+// Deletes are tombstones so other clients converge on the deletion. The
+// optional lastUpdated query parameter carries the time the delete was
+// made; if the record changed after that, the delete loses and the record
+// is kept.
 func DeleteGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		// Get the id parameter from the URL
 		id := context.Param("id")
+		lastUpdated := context.Query("lastUpdated")
 
-		// Find the document with the given _id and delete it
-		filter := bson.M{"clientid": id}
-		result, err := database.Client.Database("habits").Collection("goals").DeleteOne(database.Ctx, filter)
+		_, err := helpers.DeleteSynced(database, "goals", id, lastUpdated)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		// Check if any document was deleted
-		if result.DeletedCount == 0 {
-			helpers.NotFoundError(context)
-			return
-		}
-
-		// Return a success message
+		// always succeed: deletes are idempotent and conflicts are resolved
+		// on the next pull
 		helpers.Success(context, nil)
 	}
 }
 
 // associations
+
+// ListByGoalFilter builds the filter used to find all records of a table
+// that belong to a goal.
+func ListByGoalFilter(goalId string) bson.M {
+	return bson.M{
+		"goal":    goalId,
+		"deleted": bson.M{"$ne": true},
+	}
+}
+
+// GET /goals/:id/tasks
 func ListTasksByGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		id := context.Param("id")
 
-		// find all tasks documents in the tasks collection where the goal field matches the given goal id
-		var responseBody []models.Task
-
-		// retrieve all documents from the tasks collection where the goal field matches the given goal id
-		cursor, err := database.Client.Database("habits").Collection("tasks").Find(database.Ctx, bson.M{"goal": id})
+		cursor, err := database.Client.Database("habits").
+			Collection("tasks").
+			Find(database.Ctx, ListByGoalFilter(id))
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -242,48 +185,40 @@ func ListTasksByGoal(database models.Database) func(context *gin.Context) {
 
 		defer cursor.Close(database.Ctx)
 
-		// Iterate through the cursor and append each document to the response body
+		responseBody := []models.Task{}
+
 		for cursor.Next(database.Ctx) {
 			var task models.Task
 
-			err := cursor.Decode(&task)
-
-			task.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
-
-			if err != nil {
+			if err := cursor.Decode(&task); err != nil {
 				log.Println(err)
 				helpers.InternalServerError(context)
 				return
 			}
 
+			task.Id = idHex(cursor.Current)
+
 			responseBody = append(responseBody, task)
 		}
 
-		// Check if there was an error during iteration
 		if err := cursor.Err(); err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		if responseBody == nil {
-			responseBody = []models.Task{}
-		}
-
-		// Return the response body as a JSON response
 		helpers.Success(context, responseBody)
 	}
 }
 
+// GET /goals/:id/habits
 func ListHabitsByGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		id := context.Param("id")
 
-		// find all tasks documents in the tasks collection where the goal field matches the given goal id
-		var responseBody []models.Task
-
-		// retrieve all documents from the tasks collection where the goal field matches the given goal id
-		cursor, err := database.Client.Database("habits").Collection("habits").Find(database.Ctx, bson.M{"goal": id})
+		cursor, err := database.Client.Database("habits").
+			Collection("habits").
+			Find(database.Ctx, ListByGoalFilter(id))
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -292,35 +227,38 @@ func ListHabitsByGoal(database models.Database) func(context *gin.Context) {
 
 		defer cursor.Close(database.Ctx)
 
-		// Iterate through the cursor and append each document to the response body
+		responseBody := []models.Habit{}
+
 		for cursor.Next(database.Ctx) {
-			var task models.Task
+			var habit models.Habit
 
-			err := cursor.Decode(&task)
-
-			task.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
-
-			if err != nil {
+			if err := cursor.Decode(&habit); err != nil {
 				log.Println(err)
 				helpers.InternalServerError(context)
 				return
 			}
 
-			responseBody = append(responseBody, task)
+			habit.Id = idHex(cursor.Current)
+
+			responseBody = append(responseBody, habit)
 		}
 
-		// Check if there was an error during iteration
 		if err := cursor.Err(); err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		if responseBody == nil {
-			responseBody = []models.Task{}
-		}
-
-		// Return the response body as a JSON response
 		helpers.Success(context, responseBody)
 	}
+}
+
+func idHex(current bson.Raw) string {
+	var objectID primitive.ObjectID
+
+	if err := current.Lookup("_id").Unmarshal(&objectID); err != nil {
+		return ""
+	}
+
+	return objectID.Hex()
 }

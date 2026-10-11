@@ -1,6 +1,10 @@
 <div>
   <label>
-    {{ value | time }}
-    <input type="range" [(value)]="value" />
+    {{ value() }}
+    <input
+      type="range"
+      [value]="value()"
+      (input)="valueChange.emit($any($event.target).valueAsNumber)"
+    />
   </label>
 </div>

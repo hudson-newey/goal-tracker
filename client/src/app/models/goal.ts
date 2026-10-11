@@ -1,5 +1,6 @@
 import { Id } from "../types/helpers";
 import { AbstractModel } from "./abstractModel";
+import { normalizeStoredDate } from "../utils/dates";
 
 export interface IGoal {
   Id?: Id;
@@ -14,6 +15,11 @@ export interface IGoal {
 export class Goal extends AbstractModel<IGoal> implements IGoal {
   public constructor(data: IGoal) {
     super(data);
+
+    const normalizedCompleteBy = normalizeStoredDate(data?.CompleteBy);
+    if (normalizedCompleteBy) {
+      this.CompleteBy = normalizedCompleteBy;
+    }
   }
 
   public Id!: Id;

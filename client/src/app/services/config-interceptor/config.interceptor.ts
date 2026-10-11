@@ -6,7 +6,7 @@ import {
   HttpRequest,
   HttpResponse,
 } from "@angular/common/http";
-import { noop, Observable, of } from "rxjs";
+import { Observable, catchError, of, tap } from "rxjs";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 import { SyncQueueService } from "../syncQueue/sync-queue.service";
@@ -23,48 +23,77 @@ export class ConfigInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    const hasCustomServer = this.config.isCustomServerUrlSet();
-    const hasServerConnection = this.syncService.connectionStatus;
-    const shouldPassthroughRequest = hasCustomServer && hasServerConnection;
-
     const isPingRoute = request.url.endsWith(this.pingService.pingRoute);
 
-    if (shouldPassthroughRequest || isPingRoute) {
-      return this.realDatabaseResponse(request, next, isPingRoute);
+    // the ping route must always reach the real server, otherwise we could
+    // never detect that the server is reachable
+    if (isPingRoute) {
+      return next.handle(request);
+    }
+
+    const info = this.virtualDb.requestInfo(request.url);
+
+    // routes that don't map to a virtual table (AI suggestions, search, ...)
+    // are always sent to the real server, or answered locally when offline
+    if (!info.table) {
+      return this.handleNonVirtualRoute(request, next);
+    }
+
+    const hasServerConnection = this.syncService.connectionStatus;
+
+    if (hasServerConnection) {
+      return this.realDatabaseResponse(request, next, info.table);
     }
 
     return this.virtualDatabaseResponse(request);
   }
 
+  /**
+   * Try the real server. If the request fails (the connection dropped), the
+   * request is answered from the virtual database instead.
+   */
   private realDatabaseResponse(
     request: HttpRequest<unknown>,
     next: HttpHandler,
-    isPingRoute: boolean,
+    table: string,
   ): Observable<HttpEvent<unknown>> {
-    return new Observable<HttpEvent<unknown>>((observer) => {
-      // use the real apis database
-      const subscription = next.handle(request).subscribe({
-        next: (data) => observer.next(data),
-        error: () => {
-          // if the request fails, because we could not connect to the server
-          // we will set the connection status to false
-          // and return the virtual database representation
-          this.syncService.connectionStatus = false;
+    const info = this.virtualDb.requestInfo(request.url);
 
-          // if it is a ping route we do not want to commit it to the virtual
-          // database because it would return a stale response
-          if (isPingRoute) {
-            return noop();
+    return next.handle(request).pipe(
+      // merge the server's response into the local table so the UI
+      // refreshes immediately while online (pages listen to the virtual
+      // database change notifier) and so the app keeps working offline
+      tap((event) => {
+        if (!(event instanceof HttpResponse)) {
+          return;
+        }
+
+        const data = (event.body as any)?.data;
+
+        if (request.method === "GET") {
+          // cache list responses so the app can fall back to them when the
+          // connection drops mid-session
+          if (!info.id && !info.subResource && Array.isArray(data)) {
+            this.virtualDb.updateTable(table, JSON.stringify(data));
           }
 
-          return this.virtualDatabaseResponse(request);
-        },
-        complete: () => observer.complete(),
-      });
+          return;
+        }
 
-      // Cleanup subscription on unsubscribe
-      return () => subscription.unsubscribe();
-    });
+        if (request.method === "OPTIONS") {
+          return;
+        }
+
+        this.virtualDb.applyServerResult(request.method, table, info.id, data);
+      }),
+      catchError(() => {
+        this.syncService.connectionStatus = false;
+
+        // answer from the local database; mutating requests are safe to
+        // apply again because the server upserts by ClientId
+        return this.virtualDatabaseResponse(request);
+      }),
+    );
   }
 
   private virtualDatabaseResponse(
@@ -75,7 +104,30 @@ export class ConfigInterceptor implements HttpInterceptor {
     return of(
       new HttpResponse({
         status: 200,
-        body: { data },
+        body: { data: data ?? null },
+      }),
+    );
+  }
+
+  /**
+   * Routes without a virtual table (e.g. /ai/*). When the server cannot be
+   * reached, answer with a well-formed empty response instead of letting a
+   * network error crash subscribers that have no error handler.
+   */
+  private handleNonVirtualRoute(
+    request: HttpRequest<unknown>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(
+      catchError(() => {
+        this.syncService.connectionStatus = false;
+
+        return of(
+          new HttpResponse({
+            status: 200,
+            body: { data: [], message: "Offline" },
+          }),
+        );
       }),
     );
   }

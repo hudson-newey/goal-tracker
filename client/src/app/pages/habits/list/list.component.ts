@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  inject,
-} from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "../../../models/habit";
 import { HabitsService } from "../../../services/habits/habits.service";
@@ -57,42 +53,23 @@ export class HabitListComponent implements OnInit {
   }
 
   public completeHabit(model: Habit): void {
-    if (!model.CompletedDates?.length) {
-      model.CompletedDates = [];
-    }
-
-    model.CompletedDates.push(new Date().toLocaleDateString("en-GB"));
+    model.completeToday();
 
     this.api
       .updateHabit(model)
       .pipe(take(1))
-      .subscribe((response) => {
-        model = new Habit(response.data);
-      });
+      .subscribe(() => {});
 
     this.vibration.completionVibration();
   }
 
   public uncompleteHabit(model: Habit): void {
-    const todaysDate: string = new Date().toLocaleDateString("en-GB");
-
-    const indexToRemove: number = model.CompletedDates.findIndex(
-      (item: string) => {
-        const formattedDate: string = new Date(item).toLocaleDateString(
-          "en-GB",
-        );
-        return todaysDate === formattedDate;
-      },
-    );
-
-    model.CompletedDates.splice(indexToRemove, 1);
+    model.uncompleteToday();
 
     this.api
       .updateHabit(model)
       .pipe(take(1))
-      .subscribe((response) => {
-        model = new Habit(response.data);
-      });
+      .subscribe(() => {});
   }
 
   protected isCompletedToday(model: Habit): boolean {

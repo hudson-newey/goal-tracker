@@ -11,6 +11,7 @@ import { GptService } from "../../../services/gpt/gpt.service";
 
 import { HabitsService } from "../../../services/habits/habits.service";
 import { TasksService } from "../../../services/tasks/tasks.service";
+import { toIsoDate } from "../../../utils/dates";
 
 @Component({
   selector: "app-goal-form",
@@ -50,7 +51,7 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   protected updateCompleteBy(event: any): void {
     const value = new Date(event.target.value);
-    this.model().CompleteBy = value.toLocaleDateString("en-GB");
+    this.model().CompleteBy = toIsoDate(value);
   }
 
   protected getAiTasksAndHabits(): void {

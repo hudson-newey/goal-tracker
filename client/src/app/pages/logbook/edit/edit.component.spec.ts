@@ -1,17 +1,27 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideRouter } from "@angular/router";
+
 import { LogbookEditComponent } from "./edit.component";
 
-describe("EditComponent", () => {
+describe("LogbookEditComponent", () => {
   let component: LogbookEditComponent;
   let fixture: ComponentFixture<LogbookEditComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [LogbookEditComponent],
-    }).compileComponents();
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    });
 
     fixture = TestBed.createComponent(LogbookEditComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 

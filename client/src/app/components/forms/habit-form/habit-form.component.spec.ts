@@ -1,17 +1,28 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideRouter } from "@angular/router";
+
 import { HabitFormComponent } from "./habit-form.component";
 
 describe("HabitFormComponent", () => {
   let component: HabitFormComponent;
   let fixture: ComponentFixture<HabitFormComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [HabitFormComponent],
-    }).compileComponents();
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    });
 
     fixture = TestBed.createComponent(HabitFormComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput("creating", true);
+
     fixture.detectChanges();
   });
 

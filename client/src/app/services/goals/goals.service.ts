@@ -19,10 +19,10 @@ export class GoalsService extends AbstractService {
     return this.http.get(endpoint) as Observable<ApiHttpResponse<IGoal[]>>;
   }
 
-  // GET /goals?q=name
+  // GET /goals/search?name=partial_name
   // gets a list of goal models from a partial name
   public findGoals(searchTerm: string): Observable<ApiHttpResponse<IGoal[]>> {
-    const endpoint: string = createUrl(`/goals?q=${searchTerm}`);
+    const endpoint: string = createUrl(`/goals/search?name=${searchTerm}`);
     return this.http.get(endpoint) as Observable<ApiHttpResponse<IGoal[]>>;
   }
 

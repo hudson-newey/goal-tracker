@@ -1,5 +1,6 @@
 import { Id } from "../types/helpers";
 import { AbstractModel } from "./abstractModel";
+import { normalizeStoredDate } from "../utils/dates";
 
 export interface ILogbook {
   Id?: Id;
@@ -13,6 +14,11 @@ export interface ILogbook {
 export class Logbook extends AbstractModel<ILogbook> {
   public constructor(data: ILogbook) {
     super(data);
+
+    const normalizedCreatedAt = normalizeStoredDate(data?.CreatedAt);
+    if (normalizedCreatedAt) {
+      this.CreatedAt = normalizedCreatedAt;
+    }
   }
 
   public Id!: Id;

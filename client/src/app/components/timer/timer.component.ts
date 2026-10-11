@@ -34,6 +34,6 @@ export class TimerComponent {
 
   protected stop(): void {
     this.timer = of();
-    this.value = 0;
+    this.valueChange.emit(0);
   }
 }
